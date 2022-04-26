@@ -75,6 +75,7 @@ export const FeedCard = (props) => {
                     props.image
                 }
                 alt="Paella dish"
+                id="feedcard-img"
                 className="feedcard-img"/>
             <CardContent>
                 <Typography variant="body2" color="text.tertiary">
