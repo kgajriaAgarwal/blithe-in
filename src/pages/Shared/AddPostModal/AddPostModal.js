@@ -21,7 +21,7 @@ const ModalBoxContainer = styled(Box)(({ theme }) => ({
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "75%",
-  backgroundColor: theme.palette.mode === "light" ? "white" : "black",
+  backgroundColor: theme.palette.mode === "light" ? theme.palette.text.primary : theme.palette.text.secondary,
   border: "2px solid #000",
   boxShadow: 24,
   padding: "10px",
@@ -60,6 +60,7 @@ export const AddPostModal = (props) => {
               aria-label="close"
               component="span"
               sx={{ display: "flex", justifyContent: "end" }}
+              onClick={props.handleClose}
             >
               <MdOutlineClose />
             </IconButton>
