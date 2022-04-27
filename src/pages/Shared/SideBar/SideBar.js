@@ -34,14 +34,14 @@ export const SideBar = (props) => {
             className="cover-img"
           />
           <Link to="#" className="sidebar-link">
-            <Box className="profile-img">
+            <Box className="profile-img-box" >
               <Avatar
                 alt="Remy Sharp"
                 src="https://mui.com/static/images/avatar/1.jpg"
-                sx={{ width: "6rem", height: "6rem" }}
+                // sx={{ width: "30%", height: "30%" }}
                 className="sidebar-avatar"
               />
-              <Typography variant="h6" sx={{ color: "secondary" }}>
+              <Typography variant="h6" sx={{ color: "secondary" , paddingTop:'40%'}} >
                 Dr.Remy Sharp
               </Typography>
               <Typography variant="body2" mb={2}>

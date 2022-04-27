@@ -24,7 +24,7 @@
     cursor: pointer;
 }
 
-.profile-img{
+.profile-img-box{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -33,9 +33,10 @@
 }
 
 .sidebar-avatar{
-    width: 100%;
+    width: 6rem;
+    height: 6rem;
     height: auto;
-    transform: translateY(-52.5%);
+    transform: translateY(-72.5%);
     margin: 0;
     padding: 0;
     position: absolute;

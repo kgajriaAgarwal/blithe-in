@@ -3,7 +3,8 @@ import { Box, createTheme, CssBaseline } from "@mui/material";
 
 import { useState } from "react";
 import "./App.css";
-import MainPage from "./pages/MainPage/MainPage";
+import MainPage from "./pages/MainPage";
+import BlitheRoute from "./route/BlitheRoute";
 
 function App() {
 
@@ -82,7 +83,8 @@ function App() {
     // <ThemeProvider theme={themeLight}>
     //   <CssBaseline />
       <Box className="App" bgcolor={"Background.default"}>
-      <MainPage/>
+        <BlitheRoute/>
+      {/* <MainPage/> */}
       {/* <header className="App-header">
         <img src={logo} alt="mockBee logo" width="180" height="180" />
         <h1 className="brand-title">

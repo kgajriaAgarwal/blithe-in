@@ -204,9 +204,11 @@ export const NavBar = (props) =>  {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             >
-                <CustomMenuItem>
-                    <Avatar /> Profile
-                </CustomMenuItem>
+                <Link to="/profile">
+                    <CustomMenuItem>
+                        <Avatar /> Profile
+                    </CustomMenuItem>
+                </Link>
                 <CustomMenuItem>
                     <Avatar /> My account
                 </CustomMenuItem>
@@ -233,3 +235,11 @@ export const NavBar = (props) =>  {
         </AppBar>
     );
 }
+
+// export const NavBar = () =>{
+//     return(
+//         <>
+//             <h1> NavBar</h1>
+//         </>
+//     );
+// }

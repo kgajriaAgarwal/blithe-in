@@ -5,6 +5,7 @@ import { Feed } from "./Feed/Feed";
 import { FeedCard} from './FeedCard/FeedCard';
 import { AddPost } from './AddPost/AddPost';
 import { AddPostModal } from "./AddPostModal/AddPostModal";
+import { Loader } from "./Loader/Loader";
 
 
 export {
@@ -14,5 +15,6 @@ export {
     Feed, 
     FeedCard,
     AddPost,
-    AddPostModal
+    AddPostModal,
+    Loader
     };
