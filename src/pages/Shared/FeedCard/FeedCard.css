@@ -1,13 +1,8 @@
 
-/* .feedcard-img.css-o69gx8-MuiCardMedia-root {
-    background-image: url("https://www.vasuhealthcare.com/wp-content/uploads/2018/03/Vasu-Global1.gif");
-    object-fit: contain ;
-    height: 25rem ;
-    position: relative;
-} */
 
 #feedcard-img.feedcard-img {
-    background-image: url("https://www.vasuhealthcare.com/wp-content/uploads/2018/03/Vasu-Global1.gif");
+    /* background-image: url("https://www.vasuhealthcare.com/wp-content/uploads/2018/03/Vasu-Global1.gif"); */
+    background-image: url("../../../Assets//Images/bg.gif");
     object-fit: contain ;
     height: 25rem ;
     position: relative;

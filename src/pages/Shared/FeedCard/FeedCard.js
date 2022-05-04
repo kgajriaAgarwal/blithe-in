@@ -20,6 +20,7 @@ import Favorite from "@mui/icons-material/Favorite";
 import "./FeedCard.css";
 import { CssBaseline, Divider } from "@mui/material";
 import { getLocalStorage } from "../../../Helpers/Common/utils";
+import bgImg from '../../../Assets/Images/bg.gif';
 
 const ExpandMore = styled((props) => {
     const {
@@ -49,11 +50,12 @@ export const FeedCard = (props) => {
 
     return (
         <>
-        {/* <CssBaseline/> */}
-        <Card 
+        <CssBaseline/>
+        <Card  
             sx={
-                {marginTop: "10px"}
-        }>
+                {marginTop: "10px", color:'red'}
+        }
+        >
             <CardHeader avatar={<Avatar
                     sx={
                     {bgcolor: red[500]}}
@@ -63,10 +65,11 @@ export const FeedCard = (props) => {
                     <IconButton
                 aria-label="settings"><MoreVertIcon/></IconButton>
                 }
-                title={<Typography variant="h6" color="text.tertiary">Shrimp and Chorizo Paella</Typography>}
-                subheader={<Typography color="text.tertiary">September 14, 2016</Typography>}
+                title={<Typography variant="h6" color="text.secondary">Shrimp and Chorizo Paella</Typography>}
+                subheader={<Typography color="text.primary">September 14, 2016</Typography>}
                 className="card-header"
-                color="primary"
+                // color="primary"
+                // color="secondary"
                 id="card-header"
             /> 
             <CardMedia component="img"
@@ -78,7 +81,7 @@ export const FeedCard = (props) => {
                 id="feedcard-img"
                 className="feedcard-img"/>
             <CardContent>
-                <Typography variant="body2" color="text.tertiary">
+                <Typography variant="body2" color="text.primary">
                     This impressive paella is a perfect party dish and a fun meal to cook
                               together with your guests. Add 1 cup of frozen peas along with the
                               mussels, if you like.

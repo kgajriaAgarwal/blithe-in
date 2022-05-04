@@ -1,0 +1,87 @@
+.left-profile-box,
+.analytics-box,
+.experience-box,
+.education-box
+{
+    max-height: fit-content;
+    box-sizing: border-box;
+    border: 2px solid #CE5864;
+    border-radius: 10px;
+}
+
+.btn-cover-edit{
+    background-color: white;
+    color: black;
+    margin:5px;
+    cursor: pointer;
+}
+
+.user-cover-img{
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+    position: relative;
+    border-radius: 10px 10px 0 0;
+}
+
+
+.user-avatar{
+    width: 10rem;
+    height: 10rem;
+    height: auto;
+    transform: translateY(-75.5%);
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    margin-left: 2rem;
+    border: 4px solid white;
+}
+
+.profile-details-box{
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3rem 2rem 2rem 2rem;
+}
+
+.btn-edit-details-box{
+    color: white;
+    position: absolute;
+    float: right;
+    z-index: 2;
+    width: 65%;
+    margin-top: -2.5rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.analytics-details-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap:10px;
+}
+
+.analytics-item{
+    display: flex;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+
+}
+
+.experience-details-box{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    
+}
+
+.experience-item{  
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+

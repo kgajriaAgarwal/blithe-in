@@ -21,7 +21,7 @@ const ModalBoxContainer = styled(Box)(({ theme }) => ({
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "75%",
-  backgroundColor: theme.palette.mode === "light" ? theme.palette.text.primary : theme.palette.text.secondary,
+  backgroundColor: theme.palette.text.tertiary,
   border: "2px solid #000",
   boxShadow: 24,
   padding: "10px",
@@ -49,7 +49,7 @@ export const AddPostModal = (props) => {
               id="modal-modal-title"
               variant="h6"
               component="h2"
-              color="text.tertiary"
+              color="text.secondary"
             >
               Create a new post
             </Typography>
@@ -59,7 +59,7 @@ export const AddPostModal = (props) => {
               color="primary"
               aria-label="close"
               component="span"
-              sx={{ display: "flex", justifyContent: "end" }}
+              sx={{ display: "flex", justifyContent: "flex-end" }}
               onClick={props.handleClose}
             >
               <MdOutlineClose />
@@ -78,7 +78,7 @@ export const AddPostModal = (props) => {
             <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
           </Grid>
           <Grid item xs={10} sm={11}>
-            <Typography id="modal-modal-title" variant="h6" component="h2" color="text.tertiary">
+            <Typography id="modal-modal-title" variant="h6" component="h2" color="text.primary">
               Karishma gajria Agarwal
             </Typography>
           </Grid>
@@ -128,7 +128,7 @@ export const AddPostModal = (props) => {
               </IconButton>
             </Tooltip>
           </Grid>
-          <Grid item xs={2} sx={{ display: "flex", justifyContent: "end" }}>
+          <Grid item xs={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
             <Button variant="outlined">Post</Button>
           </Grid>
         </Grid>

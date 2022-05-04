@@ -1,12 +1,13 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+// import Login from '../Pages/Auth/Login';
 // import MockAPI from '../Helpers/Helpers/MockMan';
 import MainPage from '../pages/MainPage';
 // import MainPage from '../pages/MainPage/index';
 // import Dashboard from '../Pages/Dashboard/index';
 
-// const LoginPage = React.lazy(() => import('../Pages/Authentication/Login/Login'));
-// const SignUpPage = React.lazy(() => import('../Pages/Authentication/SignUp/SignUp'));
+const LoginPage = React.lazy(() => import('../pages/Auth/Login'));
+const SignUpPage = React.lazy(() => import('../pages/Auth/SignUp'));
 
 const NoMatch = () => {
     return (
@@ -24,8 +25,8 @@ const NoMatch = () => {
 const RouteData = () =>{
     return(
         <Routes>         
-            {/* <Route exact path='/signup' element={<SignUpPage/>}/> 
-            <Route exact path='/login' element={<LoginPage/>}/>  */}
+            <Route exact path='/signup' element={<SignUpPage/>}/> 
+            <Route exact path='/login' element={<LoginPage/>}/> 
             {/* <Route exact path='/mockman' element={<MockAPI/>}/> */}
             <Route path='/*' element={<MainPage/>}/>
         </Routes>

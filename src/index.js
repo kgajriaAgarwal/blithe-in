@@ -5,21 +5,18 @@ import App from "./App";
 import { makeServer } from "./server";
 import {
   BrowserRouter,
-  Routes,
-  Route,
 } from "react-router-dom";
-import theme from './pages/Theme/theme';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { ThemeModeProvider } from "./Helpers/Context";
 
 // Call make Server
 makeServer();
 
 ReactDOM.render(
-  // <ThemeProvider theme={theme?.palette?.mode}>
+  <ThemeModeProvider>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  // </ThemeProvider>
+  </ThemeModeProvider>
   ,
   document.getElementById("root")
 );

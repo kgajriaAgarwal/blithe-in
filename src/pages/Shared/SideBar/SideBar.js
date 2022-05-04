@@ -12,9 +12,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./SideBar.css";
 import { MdModeNight, MdLightMode } from "react-icons/md";
+import { useThemeMode } from "../../../Helpers/Context";
 
 export const SideBar = (props) => {
-  const { mode, setMode } = props;
+  const {themeMode, setThemeMode} = useThemeMode();
+
 
   return (
     <Box
@@ -25,7 +27,7 @@ export const SideBar = (props) => {
     >
       <Box position="fixed" width="14%">
         <Box
-          bgcolor={mode === "light" ? "#A14F57" : "Background.default"}
+          bgcolor={themeMode === "light" ? "#A14F57" : "Background.default"}
           className="sidebar-profile-box"
         >
           <img
@@ -52,7 +54,7 @@ export const SideBar = (props) => {
         </Box>
 
         <Box
-          bgcolor={mode === "light" ? "#A14F57" : "Background.default"}
+          bgcolor={themeMode === "light" ? "#A14F57" : "Background.default"}
           className="sidebar-theme-box"
           mt={2}
         >
@@ -64,7 +66,7 @@ export const SideBar = (props) => {
               <MdLightMode color="yellow" />
               <Switch
                 color="default"
-                onChange={(e) => setMode(mode === "light" ? "dark" : "light")}
+                onChange={(e) => setThemeMode(themeMode === "light" ? "dark" : "light")}
               />
               <MdModeNight color="gray" />
             </ListItem>
@@ -72,7 +74,7 @@ export const SideBar = (props) => {
         </Box>
 
         <Box
-          bgcolor={mode === "light" ? "#A14F57" : "Background.default"}
+          bgcolor={themeMode === "light" ? "#A14F57" : "Background.default"}
           mt={2}
           className="sidebar-activities-box"
           alignItems={"center"}

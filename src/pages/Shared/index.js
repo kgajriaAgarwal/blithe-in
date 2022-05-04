@@ -6,6 +6,8 @@ import { FeedCard} from './FeedCard/FeedCard';
 import { AddPost } from './AddPost/AddPost';
 import { AddPostModal } from "./AddPostModal/AddPostModal";
 import { Loader } from "./Loader/Loader";
+import { SwipeableStepper } from "./SwipeableStepper/SwipeableStepper";
+import { Input } from "./Input/Input";
 
 
 export {
@@ -16,5 +18,7 @@ export {
     FeedCard,
     AddPost,
     AddPostModal,
-    Loader
+    Loader,
+    Input,
+    SwipeableStepper
     };

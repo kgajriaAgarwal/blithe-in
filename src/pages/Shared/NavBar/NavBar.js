@@ -36,7 +36,7 @@ export const NavBar = (props) =>  {
         })
 
         const Search = styled("div")(({theme}) =>({
-            backgroundColor: theme.palette.mode === "light" ? theme.palette.text.primary : theme.palette.text.secondary,
+            backgroundColor:  theme.palette.text.tertiary,
             padding:"0 10px",
             borderRadius:theme.shape.borderRadius,
             width: '40%',
@@ -57,7 +57,7 @@ export const NavBar = (props) =>  {
         }))
 
         const CustomTab = styled(Tab)(({theme}) => ({
-            color: theme.palette.text.primary
+            color: theme.palette.mode === "light" ? theme.palette.text.tertiary : theme.palette.text.primary,
         }))
 
         const UserBox = styled(Box)(({theme}) =>({
@@ -71,7 +71,7 @@ export const NavBar = (props) =>  {
         }))
 
         const CustomMenuItem = styled(MenuItem)(({theme}) =>({
-            color: theme.palette.mode === "light" ? theme.palette.text.tertiary : theme.palette.text.primary,
+            color:  theme.palette.text.primary,
         }))
 
 
@@ -99,11 +99,12 @@ export const NavBar = (props) =>  {
                         //onChange={handleChange}
                         variant="fullWidth"
                         textColor="secondary"
+                        color='white'
                         >
                         
                 
                         <CustomTab icon={<Badge badgeContent={4} color="error" >
-                            <Tooltip title="Home">
+                            <Tooltip title="Home" color='white'>
                                 <HomeIcon />
                             </Tooltip>
                         </Badge>} 
@@ -225,21 +226,16 @@ export const NavBar = (props) =>  {
                     </ListItemIcon>
                     Settings
                 </CustomMenuItem>
-                <CustomMenuItem>
-                    <ListItemIcon>
-                        <Logout fontSize="small" />
-                    </ListItemIcon>
-                    Logout
-                </CustomMenuItem>
+                <Link to="./login">
+                    <CustomMenuItem>
+                        <ListItemIcon>
+                            <Logout fontSize="small" />
+                        </ListItemIcon>
+                        Login
+                    </CustomMenuItem>
+                </Link>
             </Menu>
         </AppBar>
     );
 }
 
-// export const NavBar = () =>{
-//     return(
-//         <>
-//             <h1> NavBar</h1>
-//         </>
-//     );
-// }
