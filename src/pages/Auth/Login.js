@@ -50,9 +50,9 @@ const CustomStack = styled(Box)(({ theme }) => ({
 const AuthContainer = styled(Box)(({ theme }) => ({
   backgroundColor:
     theme.palette.mode === "light"
-      ? "#F5F5F5"
+      ? theme.palette.Background.primary
       : theme.palette.background.default,
-  color: "#A14F57",
+  color: theme.palette.text.secondary,
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
@@ -69,7 +69,7 @@ const AuthContainer = styled(Box)(({ theme }) => ({
       theme.palette.mode === "light"
         ? theme.palette.background.primary
         : theme.palette.background.default,
-    opacity: 0.8,
+    opacity: 0.9,
     height: "80%",
   },
 }));
@@ -103,11 +103,11 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log("handle login..");
-    console.log("values is:", values);
+    // console.log("handle login..");
+    // console.log("values is:", values);
   };
 
-  console.log("values:",values);
+  // console.log("values:",values);
 
   return (
     <>

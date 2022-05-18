@@ -4,12 +4,6 @@ import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
 
 const FeedsPage = React.lazy(() => import('../FeedsPage/FeedsPage'));
 const UserProfile = React.lazy(() => import('../UserProfile/UserProfile'));
-// const VideoListingPage = React.lazy(() => import('../VideoListingPage/VideoListingPage'));
-// const LikedVideosPage = React.lazy(() => import('../LikedVideosPage/LikedVideosPage'));
-// const Video = React.lazy(() => import('../Video/Video'));
-// const PlayList = React.lazy(() => import('../PlayList/PlayList'));
-// const WatchLater = React.lazy(() => import('../WatchLater/WatchLater'));
-// const History = React.lazy(() => import('../History/History'));
 
 function NoMatch() {
     return (

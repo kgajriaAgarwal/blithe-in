@@ -40,8 +40,10 @@ const InputBox = styled(Box)(({ theme }) => ({
 
   const AuthContainer = styled(Box)(({ theme }) => ({
     backgroundColor:
-        theme.palette.mode === "light" ? "#F5F5F5" : theme.palette.background.default,
-    color: "#A14F57",
+    theme.palette.mode === "light"
+      ? theme.palette.Background.primary
+      : theme.palette.background.default,
+    color: theme.palette.text.secondary,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -67,7 +69,6 @@ const InputBox = styled(Box)(({ theme }) => ({
 
 const SignUp = () => {
   const { themeMode } = useThemeMode();
-  console.log("thme mode:", themeMode);
 
   const [values, setValues] = useState({
     last_name:"",

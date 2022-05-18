@@ -20,7 +20,7 @@
 
 .sidebar-link{
     text-decoration: none;
-    color: whitesmoke;
+    color: var(--lightgray-color);
     cursor: pointer;
 }
 

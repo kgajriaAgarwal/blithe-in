@@ -15,7 +15,7 @@ export const AddPost = (props) =>{
             <Tooltip title="Add" arrow 
                 sx={{position:'fixed', 
                     bottom:20, 
-                    left:{xs:"calc(50% - 25px)", md: 30}
+                    right:{xs:"calc(50% - 25px)", md: 30}
                 }}>
                 <Fab color="primary" aria-label="add" onClick={handleOpen}>
                     <AddIcon  color='secondary'/>
