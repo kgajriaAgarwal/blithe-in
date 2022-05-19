@@ -11,7 +11,7 @@ export const showErrorToast = (errorMessage, event) => {
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
-        autoClose: 4000,
+        autoClose: 3000,
       });
     }
   };
@@ -24,7 +24,7 @@ export const showErrorToast = (errorMessage, event) => {
         hideProgressBar: true,
         closeOnClick: true,
         pauseOnHover: true,
-        autoClose: 4000,
+        autoClose: 3000,
       });
     }
   };

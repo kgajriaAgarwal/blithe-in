@@ -62,7 +62,7 @@ function App() {
         <BlitheRoute/>
       </Box>
       <ToastContainer
-      autoClose={4000}
+      autoClose={3000}
       className="custom-toaster-main-cls"
       toastClassName="custom-toaster-bg"
       />
