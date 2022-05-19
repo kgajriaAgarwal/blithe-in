@@ -1,4 +1,4 @@
-import { AppBar, styled, Toolbar, Typography , InputBase, Badge ,Tab, Tabs, Avatar, Tooltip, Divider,Menu,  MenuItem, IconButton} from '@mui/material';
+import { AppBar, styled, Toolbar, Typography , InputBase, Badge ,Tab, Tabs, Avatar, Tooltip, Divider,Menu,  MenuItem, IconButton, Button} from '@mui/material';
 import React, {useState} from 'react';
 import blithelogo from '../../../Assets/logo/logo-gray.jpg'
 import './NavBar.css';
@@ -14,66 +14,62 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import PublicIcon from '@mui/icons-material/Public';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../../../app/slice/authSlice';
+
+const StyledToolbar = styled(Toolbar)({
+    display: 'flex',
+    justifyContent:'space-between'
+})
+
+const Search = styled("div")(({theme}) =>({
+    backgroundColor:  theme.palette.text.tertiary,
+    padding:"0 10px",
+    borderRadius:theme.shape.borderRadius,
+    width: '40%',
+}))
+
+const SearchInput = styled(InputBase)(({theme}) =>({
+    color: theme.palette.primary.main,
+    cursor: 'pointer'
+}))
+
+const Icons = styled(Box)(({theme}) =>({
+    display:'flex',
+    alignItems:'center',
+    color: theme.palette.text.primary,
+    [theme.breakpoints.down("sm")]:{
+        display: 'none'
+    }
+}))
+
+const CustomTab = styled(Tab)(({theme}) => ({
+    color: theme.palette.mode === "light" ? theme.palette.text.tertiary : theme.palette.text.primary,
+}))
+
+const UserBox = styled(Box)(({theme}) =>({
+    display:'flex',
+    alignItems:'center',
+    color: theme.palette.text.primary,
+    gap:'10px',
+    [theme.breakpoints.up("sm")]:{
+        display: 'none'
+    }
+}))
+
+const CustomMenuItem = styled(MenuItem)(({theme}) =>({
+    color:  theme.palette.text.primary,
+}))
 
 
 export const NavBar = (props) =>  {
 
+        const { token } = useSelector((state) => state.auth);
+        const dataa = useSelector((state) => state.auth.auth);
         const [open, setOpen] = useState(false);
-        // const [anchorEl, setAnchorEl] = React.useState(null);
-        // const open = Boolean(anchorEl);
-        // const handleClick = (event) => {
-        // setAnchorEl(event.currentTarget);
-        // };
-        // const handleClose = () => {
-        // setAnchorEl(null);
-        // };
-
-
-        const StyledToolbar = styled(Toolbar)({
-            display: 'flex',
-            justifyContent:'space-between'
-        })
-
-        const Search = styled("div")(({theme}) =>({
-            backgroundColor:  theme.palette.text.tertiary,
-            padding:"0 10px",
-            borderRadius:theme.shape.borderRadius,
-            width: '40%',
-        }))
-
-        const SearchInput = styled(InputBase)(({theme}) =>({
-            color: theme.palette.primary.main,
-            cursor: 'pointer'
-        }))
-
-        const Icons = styled(Box)(({theme}) =>({
-            display:'flex',
-            alignItems:'center',
-            color: theme.palette.text.primary,
-            [theme.breakpoints.down("sm")]:{
-                display: 'none'
-            }
-        }))
-
-        const CustomTab = styled(Tab)(({theme}) => ({
-            color: theme.palette.mode === "light" ? theme.palette.text.tertiary : theme.palette.text.primary,
-        }))
-
-        const UserBox = styled(Box)(({theme}) =>({
-            display:'flex',
-            alignItems:'center',
-            color: theme.palette.text.primary,
-            gap:'10px',
-            [theme.breakpoints.up("sm")]:{
-                display: 'none'
-            }
-        }))
-
-        const CustomMenuItem = styled(MenuItem)(({theme}) =>({
-            color:  theme.palette.text.primary,
-        }))
-
+        const navigate = useNavigate();
+        const dispatch = useDispatch();
 
     return (
         <AppBar position='sticky' bgcolor={"#A14F57"}>
@@ -226,14 +222,14 @@ export const NavBar = (props) =>  {
                     </ListItemIcon>
                     Settings
                 </CustomMenuItem>
-                <Link to="./login">
+                <Button onClick={()=> dataa && dataa.token ?  dispatch(logoutUser()) : navigate("./login")}>
                     <CustomMenuItem>
                         <ListItemIcon>
                             <Logout fontSize="small" />
                         </ListItemIcon>
-                        Login
+                        { dataa && dataa.token ? 'Logout': 'Login'}
                     </CustomMenuItem>
-                </Link>
+                </Button>
             </Menu>
         </AppBar>
     );

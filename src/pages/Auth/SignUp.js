@@ -5,22 +5,17 @@ import {
   styled,
   Button,
   FormControl,
+  FormHelperText,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useThemeMode } from "../../Helpers/Context";
 // import { SwipeableStepper } from '../Shared';
 import "./Auth.css";
 import { Input } from "../Shared";
-import { useState } from "react";
-
-
-// CODE IS COMMENTED IN THIS FILE FOR FUTURE PERSPECTIVE ONLY 
-const InputBox = styled(Box)(({ theme }) => ({
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "10px",
-  }));
+import { useEffect, useState } from "react";
+import { signUpUser } from "../../app/slice/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { validateSignUp } from "../../Helpers/Validations";
 
   const CustomStack = styled(Box)(({ theme }) => ({
     display: "flex",
@@ -68,12 +63,14 @@ const InputBox = styled(Box)(({ theme }) => ({
 
 
 const SignUp = () => {
-  const { themeMode } = useThemeMode();
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [values, setValues] = useState({
     last_name:"",
     first_name: "",
-    email: "",
+    username: "",
     password: "",
     confirm_password:"",
     show_password: "false",
@@ -108,6 +105,59 @@ const SignUp = () => {
     });
   };
 
+    // Call on Form Submit
+    const validateForm = (event) => {
+      event.preventDefault();
+      let validate = validateSignUp({
+        first_name: values.first_name,
+        last_name: values.last_name,
+        username: values.username,
+        password: values.password,
+        confirm_password: values.confirm_password,
+      });
+      setValues((prevState) => {
+        return {
+          ...prevState,
+          error: validate.errors,
+        };
+      });
+      if (validate.isValid) handleSignup(event);
+    };
+  
+    const handleSignup = async (e) => {
+      e.preventDefault();
+        const signupData = {
+          firstName: values.first_name,
+          lastName: values.last_name,
+          username: values.username,
+          password: values.password,
+        };
+      
+        dispatch(signUpUser(signupData)).unwrap()
+        .then(() => {
+          navigate('/')
+        })
+    };
+  
+    useEffect(
+      () =>
+        setTimeout(
+          () =>
+            setValues((prevState) => {
+              return {
+                ...prevState,
+                error: { first_name: null,
+                  last_name: null,
+                  username: null,
+                  password: null,
+                  confirm_password: null, },
+              };
+            }),
+          10000
+        ),
+      [values.error]
+    );
+
   return (
     <>
       <CustomStack>
@@ -118,7 +168,7 @@ const SignUp = () => {
           className="bg-img"
         />
         <AuthContainer>
-            <form className="auth-form" onSubmit={(e) => handleLogin(e)}>
+            <form className="auth-form" onSubmit={(e) => validateForm(e)}>
           <Typography variant="h6" sx={{ color: "secondary" }} mt={2}>
             Blithe IN
             <br />
@@ -138,6 +188,9 @@ const SignUp = () => {
                 label="First name"
                 inputicon="false"
               />
+              <FormHelperText id="my-helper-text" sx={{ color: "red" }}>
+                {values.error.first_name}
+              </FormHelperText>
             </FormControl>
             <FormControl variant="outlined" className="input" size="small">
               <Input
@@ -148,16 +201,22 @@ const SignUp = () => {
                 label="Last name"
                 inputicon="false"
               />
+               <FormHelperText id="my-helper-text" sx={{ color: "red" }}>
+                {values.error.last_name}
+              </FormHelperText>
             </FormControl>
             <FormControl variant="outlined" className="input" size="small">
               <Input
                 type="email"
-                name={"email"}
-                value={values.email}
+                name={"username"}
+                value={values.username}
                 onChange={handleInputChange}
                 label="Email"
                 inputicon="false"
               />
+              <FormHelperText id="my-helper-text" sx={{ color: "red" }}>
+                {values.error.username}
+              </FormHelperText>
             </FormControl>
             <FormControl
               sx={{ m: 1, width: "25ch" }}
@@ -176,6 +235,9 @@ const SignUp = () => {
                 show_password={values.show_password}
                 handle_action = {()=> handleshowPassword("password")}
               />
+               <FormHelperText id="my-helper-text" sx={{ color: "red" }}>
+                {values.error.password}
+              </FormHelperText>
             </FormControl>
             <FormControl
               sx={{ m: 1, width: "25ch" }}
@@ -194,6 +256,9 @@ const SignUp = () => {
                 show_confirm_password={values.show_confirm_password}
                 handle_action = {()=> handleshowPassword("confirm_password")}
               />
+               <FormHelperText id="my-helper-text" sx={{ color: "red" }}>
+                {values.error.confirm_password}
+              </FormHelperText>
             </FormControl>
             <Box>
               Have an account ?? <Link to="/login">Login</Link>

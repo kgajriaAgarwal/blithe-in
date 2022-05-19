@@ -1,35 +1,21 @@
 import {
-  Stack,
   Box,
   Typography,
   Divider,
-  TextField,
   styled,
   Button,
-  InputAdornment,
-  IconButton,
   FormControl,
-  InputLabel,
-  OutlinedInput,
+  FormHelperText,
 } from "@mui/material";
-import react, { useState } from "react";
-import { Link } from "react-router-dom";
-import bgImg from "../../Assets/Images/bg-collage.jpg";
-import blitheLogo from "../../Assets/logo/logo-blue.jpg";
-import { useThemeMode } from "../../Helpers/Context";
+import react, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 // import { SwipeableStepper } from '../Shared';
 import "./Auth.css";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { Input } from "../Shared";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser } from "../../app/slice/authSlice";
+import { validateLogin } from "../../Helpers/Validations";
 
-
-const InputBox = styled(Box)(({ theme }) => ({
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  gap: "10px",
-}));
 
 const CustomStack = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -76,8 +62,12 @@ const AuthContainer = styled(Box)(({ theme }) => ({
 
 const Login = () => {
 
+  const { token } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [values, setValues] = useState({
-    email: "",
+    username: "",
     password: "",
     show_password: "false",
     button_disable: false,
@@ -99,15 +89,60 @@ const Login = () => {
         show_password: prevState.show_password==='true' ? "false" : "true",
       };
     });
+  }; 
+
+  // Call on Form Submit
+  const validateForm = (event, type) => {
+    event.preventDefault();
+    let validate = validateLogin({
+      username: values.username,
+      password: values.password,
+    });
+    setValues((prevState) => {
+      return {
+        ...prevState,
+        error: validate.errors,
+      };
+    });
+    if (validate.isValid) handleLogin(event, type);
   };
 
-  const handleLogin = (e) => {
+
+  const handleLogin = async (e, type) => {
     e.preventDefault();
-    // console.log("handle login..");
-    // console.log("values is:", values);
+
+    let login_Data = {};
+
+    if (type === "test") {
+       login_Data = {
+        username:"karishma@gmail.com",
+        password: "abc@123",
+      }
+      
+    } else {
+      login_Data = { email: values.email, password: values.password };
+    }
+
+    dispatch(loginUser(login_Data)).unwrap()
+    .then(() => {
+      navigate('/')
+    })
   };
 
-  // console.log("values:",values);
+  useEffect(
+    () =>
+      setTimeout(
+        () =>
+          setValues((prevState) => {
+            return {
+              ...prevState,
+              error: { username: null, password: null },
+            };
+          }),
+        10000
+      ),
+    [values.error]
+  );
 
   return (
     <>
@@ -119,7 +154,11 @@ const Login = () => {
           className="bg-img"
         />
         <AuthContainer>
-          <form className="auth-form" onSubmit={(e) => handleLogin(e)}>
+          <form className="auth-form" 
+            // onSubmit={(e) => handleLogin(e)}
+            noValidate
+            onSubmit={(e) => validateForm(e, "user")}
+          >
             <Typography variant="h6" sx={{ color: "secondary" }} mt={2}>
               Blithe IN
               <br />
@@ -133,12 +172,15 @@ const Login = () => {
             <FormControl variant="outlined" className="input" size="small">
               <Input
                 type="email"
-                name={"email"}
-                value={values.email}
+                name={"username"}
+                value={values.username}
                 onChange={handleInputChange}
                 label="Email"
                 inputicon="false"
               />
+              <FormHelperText id="my-helper-text" sx={{ color: "red" }}>
+                {values.error.username}
+              </FormHelperText>
             </FormControl>
 
             <FormControl
@@ -157,12 +199,17 @@ const Login = () => {
                 show_password={values.show_password}
                 handle_action = {handleshowPassword}
               />
+              <FormHelperText id="my-helper-text" sx={{ color: "red" }}>
+                {values.error.password}
+              </FormHelperText>
             </FormControl>
 
             <Box>
               Don't have an account <Link to="/signup">Signup</Link>
             </Box>
-            
+            <Button variant="contained" onClick={(e) => handleLogin(e, "test")}>
+              Guest Login 
+            </Button>
             <Button variant="contained" type="submit">
               Login
             </Button>
