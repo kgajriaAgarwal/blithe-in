@@ -6,10 +6,12 @@ import {
     List,
     ListItem,
     ListItemText,
-    styled
+    styled,
+    Divider
 } from '@mui/material';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import { blitheinNews } from '../../../data';
 import {getLocalStorage} from '../../../Helpers/Common/utils';
 
 export const RightBar = (props) => {
@@ -47,26 +49,22 @@ export const RightBar = (props) => {
                             Blithein news
                         </Typography>
                         <List dense='dense'>
-                            <ListItem>
+                            {blitheinNews && blitheinNews.length ?
+                                blitheinNews.map(news => <>
+                                    <ListItem key={news?.id}>
+                                        <ListItemText primary={news?.news}
+                                            //secondary={secondary ? 'Secondary text' : null}
+                                        />
+                                    </ListItem>
+                                    <Divider/>
+                                </>)
+                            :'No recent news available'}
+                            {/* <ListItem>
                                 <ListItemText primary="Single-line item"
                                     //secondary={secondary ? 'Secondary text' : null}
                                 />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="Single-line item"
-                                    //secondary={secondary ? 'Secondary text' : null}
-                                />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="Single-line item"
-                                    //secondary={secondary ? 'Secondary text' : null}
-                                />
-                            </ListItem>
-                            <ListItem>
-                                <ListItemText primary="Single-line item"
-                                    //secondary={secondary ? 'Secondary text' : null}
-                                />
-                            </ListItem>
+                            </ListItem> */}
+                            
                         </List>
                     </Grid>
                 </NewsBoxConatiner>

@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { showErrorToast, showSuccessToast } from "../../Helpers/Common/utils";
+import { setLocalStorage, showErrorToast, showSuccessToast } from "../../Helpers/Common/utils";
 import { actionLogin, actionSignup } from "../../Helpers/Services/actions";
 
 
@@ -49,7 +49,9 @@ const authSlice = createSlice({
         token: null,
         auth_data: {},
         status:'idle', // 'idle' | 'loading' | 'suceeded' | 'failed'
-        error:'null'
+        error:'null',
+        isLoggedIn : false,
+        auth: {}
       };
     },
   },
@@ -69,9 +71,10 @@ const authSlice = createSlice({
         token: action.payload.encodedToken,
         user:action.payload.foundUser,
       };
-      localStorage.setItem("authData", action.payload.encodedToken);
+      setLocalStorage("authData", action.payload.encodedToken);
       localStorage.setItem("userData", JSON.stringify(action.payload.foundUser));
       showSuccessToast("user logged in successfully!!")
+      state.isLoggedIn = true
     },
     [loginUser.rejected]: (state, action) => {
       state.auth = {
@@ -79,6 +82,7 @@ const authSlice = createSlice({
         data: {},
         error: action.error.message,
       };
+      state.isLoggedIn = false
     },
 
     //SIGNUP
@@ -97,9 +101,11 @@ const authSlice = createSlice({
         token: action.payload.encodedToken,
         user:action.payload.createdUser,
       };
+
       localStorage.setItem("authData", action.payload.encodedToken);
       localStorage.setItem("userData", JSON.stringify(action.payload.createdUser));
       showSuccessToast("user registered successfully!!")
+      state.isLoggedIn = true
     },
     [signUpUser.rejected]: (state, action) => {
       state.auth = {
@@ -107,6 +113,7 @@ const authSlice = createSlice({
         data: {},
         error: action.error.message,
       };
+      state.isLoggedIn = false
     },
   }
 })

@@ -1,5 +1,5 @@
 import { AppBar, styled, Toolbar, Typography , InputBase, Badge ,Tab, Tabs, Avatar, Tooltip, Divider,Menu,  MenuItem, IconButton, Button} from '@mui/material';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import blithelogo from '../../../Assets/logo/logo-gray.jpg'
 import './NavBar.css';
 import { TiSocialLinkedinCircular } from "react-icons/ti";
@@ -17,6 +17,8 @@ import PublicIcon from '@mui/icons-material/Public';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../../app/slice/authSlice';
+import { getUserDetailsByID } from '../../../app/slice/userSlice';
+import { getLocalStorage } from '../../../Helpers/Common/utils';
 
 const StyledToolbar = styled(Toolbar)({
     display: 'flex',
@@ -70,6 +72,9 @@ export const NavBar = (props) =>  {
         const [open, setOpen] = useState(false);
         const navigate = useNavigate();
         const dispatch = useDispatch();
+         const id = dataa?.user?._id ? dataa?.user?._id :'';
+
+        const userData = getLocalStorage("userData")
 
     return (
         <AppBar position='sticky' bgcolor={"#A14F57"}>
@@ -147,7 +152,7 @@ export const NavBar = (props) =>  {
 
                         <CustomTab icon={
                             <Tooltip title="My Profile">
-                                <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" sx={{ width: '2rem', height: '2rem' }}
+                                <Avatar alt={userData?.firstName} src={userData?.profilePic} sx={{ width: '2rem', height: '2rem' }}
                                     onClick={e=> setOpen(true)}
                                 />
                             </Tooltip>    
@@ -159,8 +164,9 @@ export const NavBar = (props) =>  {
                     </Tabs>
                 </Icons>
                 <UserBox  onClick={e=> setOpen(true)}>
-                    <Avatar alt="Remy Sharp" src="https://mui.com/static/images/avatar/1.jpg" sx={{ width: '2rem', height: '2rem' }} />
-                    <Typography variant='span'>John</Typography>
+                    <Avatar alt={userData?.firstName}
+              src={userData?.profilePic} sx={{ width: '2rem', height: '2rem' }} />
+                    <Typography variant='span'>{userData?.firstName}</Typography>
                 </UserBox>
             </StyledToolbar>
             
@@ -201,7 +207,9 @@ export const NavBar = (props) =>  {
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             >
-                <Link to="/profile">
+                {/* to={`/user/profile/${}`} */}
+                {/* <Link to={userData ? `/profile/${userData._id}` : '#'}> */}
+                <Link to={id  && id.length ? `/profile/${id}` : '#'}>
                     <CustomMenuItem>
                         <Avatar /> Profile
                     </CustomMenuItem>

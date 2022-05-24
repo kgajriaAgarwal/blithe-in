@@ -25,3 +25,59 @@ export const actionSignup = async (data) => {
     }
 };
 
+//USERS
+
+//action to get All users
+export const getAllUsers = async (data) => {
+  const response = await mainApiService("getAllUsers", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};
+
+//action to get All users
+export const getUserById = async (data) => {
+  const response = await mainApiService("getUserById", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};
+
+//POSTS
+export const getAllPosts = async (data) => {
+  const response = await mainApiService("getAllPosts", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};
+
+//getPostById
+export const getPostById = async (data) => {
+  const response = await mainApiService("getPostById", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};
+
+//getPostByUsername
+export const getPostByUsername = async (data) => {
+  const response = await mainApiService("getPostByUsername", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};

@@ -1,9 +1,12 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes, Link} from 'react-router-dom';
+import PrivateRoute from '../../route/PrivateRoute';
+// import FeedDetailsPage from '../FeedDetailsPage/FeedDetailsPage';
 // import PrivateRoute from '../../route/PrivateRoute';
 
 const FeedsPage = React.lazy(() => import('../FeedsPage/FeedsPage'));
 const UserProfile = React.lazy(() => import('../UserProfile/UserProfile'));
+const FeedDetailsPage = React.lazy(() => import('../FeedDetailsPage/FeedDetailsPage'));
 
 function NoMatch() {
     return (
@@ -20,15 +23,15 @@ function NoMatch() {
 const RouteData = () =>{
     return(
         <Routes>  
-           {/* <Route exact path='/user' element={<PrivateRoute/>}>                
-              <Route exact path="/user/liked-videos"  element={<LikedVideosPage/>}/> 
-              <Route exact path='/user/playlists' element={<PlayList/>}/>
-              <Route exact path='/user/watchlater' element={<WatchLater/>}/>
-              <Route exact path='/user/history' element={<History/>}/>
+           <Route exact path='/user' element={<PrivateRoute/>}>                
+              {/* <Route exact path="/user/profile/:id"  element={<UserProfile/>}/>  */}
             </Route>
-            <Route exact path="/video/:videoId"  element={<Video/>}/> 
+             {/*<Route exact path="/video/:videoId"  element={<Video/>}/> 
             <Route exact path="/videos/:categoryId"  element={<VideoListingPage/>}/>  */}
-            <Route exact path='/profile' element={<UserProfile/>}/>
+            {/* <Route exact path='/profile' element={<UserProfile/>}/> */}
+            <Route exact path="/profile/:userId"  element={<UserProfile/>}/>
+            <Route exact path="/posts/user/:username"  element={<FeedsPage/>}/>
+            <Route exact path="/post/:postId"  element={<FeedDetailsPage/>}/> 
             <Route exact path='/home' element={<FeedsPage/>}/>
             <Route exact path='/' element={<FeedsPage/>}/>
         </Routes>

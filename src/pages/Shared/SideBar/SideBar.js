@@ -8,14 +8,32 @@ import {
   Divider,
   Switch,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./SideBar.css";
 import { MdModeNight, MdLightMode } from "react-icons/md";
 import { useThemeMode } from "../../../Helpers/Context";
+import { useDispatch, useSelector } from 'react-redux';
+import { getLocalStorage } from "../../../Helpers/Common/utils";
+import { getUserDetailsByID } from "../../../app/slice/userSlice";
+import logoBlue from "../../../Assets/logo/logo-blue.jpg";
 
 export const SideBar = (props) => {
   const {themeMode, setThemeMode} = useThemeMode();
+  const dispatch = useDispatch();
+  const dataa = useSelector((state) => state.auth);
+  const userDataa = useSelector((state) => state.user);
+  const user_info = dataa?.isLoggedIn===false ? "" :userDataa?.userDetails?.data?.user
+
+  const userInfo = dataa?.user? dataa?.user : '';
+  const id = dataa?.auth?.user?._id 
+
+  useEffect(()=>  {
+    if(id){
+      dispatch(getUserDetailsByID(id))
+    }
+  }
+  , [ id && id.length ? id : '' ])
 
 
   return (
@@ -38,16 +56,17 @@ export const SideBar = (props) => {
           <Link to="#" className="sidebar-link">
             <Box className="profile-img-box" >
               <Avatar
-                alt="Remy Sharp"
-                src="https://mui.com/static/images/avatar/1.jpg"
+                alt={`${user_info?.firstName} ${user_info?.lastName}`}
+                src={user_info?.profilePic? user_info?.profilePic :logoBlue}
                 // sx={{ width: "30%", height: "30%" }}
+                id = "sidebar-avatar"
                 className="sidebar-avatar"
               />
               <Typography variant="h6" sx={{ color: "secondary" , paddingTop:'40%'}} >
-                Dr.Remy Sharp
+              {user_info?.firstName&& user_info?.lastName ? `${user_info?.firstName} ${user_info?.lastName}`: 'BlitheIn'}
               </Typography>
-              <Typography variant="body2" mb={2}>
-                Orthopedic surgeon
+              <Typography variant="body2" mb={2} textAlign='center'>
+              {user_info?.profileTitle? user_info?.profileTitle : 'A Proffessional networking site for healthcare proffessionals..'}
               </Typography>
             </Box>
           </Link>

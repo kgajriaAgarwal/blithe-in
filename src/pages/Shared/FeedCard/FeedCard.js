@@ -21,6 +21,8 @@ import "./FeedCard.css";
 import { CssBaseline, Divider } from "@mui/material";
 import { getLocalStorage } from "../../../Helpers/Common/utils";
 import bgImg from '../../../Assets/Images/bg.gif';
+import { useNavigate } from "react-router-dom";
+// import { Navigate } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
     const {
@@ -35,6 +37,10 @@ const ExpandMore = styled((props) => {
 }));
 
 export const FeedCard = (props) => {
+
+    const navigate = useNavigate();
+    const {feed} = props;
+    
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -65,8 +71,8 @@ export const FeedCard = (props) => {
                     <IconButton
                 aria-label="settings"><MoreVertIcon/></IconButton>
                 }
-                title={<Typography variant="h6" color="text.secondary">Shrimp and Chorizo Paella</Typography>}
-                subheader={<Typography color="text.primary">September 14, 2016</Typography>}
+                title={<Typography variant="h6" color="text.secondary">{feed.username}</Typography>}
+                subheader={<Typography color="text.primary">{feed.createdAt}</Typography>}
                 className="card-header"
                 // color="primary"
                 // color="secondary"
@@ -74,17 +80,17 @@ export const FeedCard = (props) => {
             /> 
             <CardMedia component="img"
                 // height="20%"
-                image={
-                    props.image
-                }
-                alt="Paella dish"
+                image={feed.postImage}
+                alt={feed.title}
                 id="feedcard-img"
-                className="feedcard-img"/>
+                className="feedcard-img"
+                //onClick={ () => navigate("/", {state:{id: feed._id,module:'postDetails'}})}
+                onClick={()=> navigate(`/post/${feed._id}`)}
+               />
             <CardContent>
+                <Typography variant="h6" color="text.secondary">{feed.title}</Typography>
                 <Typography variant="body2" color="text.primary">
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                              together with your guests. Add 1 cup of frozen peas along with the
-                              mussels, if you like.
+                    {feed.content}
                 </Typography>
             </CardContent>
             <Divider/>

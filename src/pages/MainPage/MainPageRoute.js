@@ -7,8 +7,8 @@ import RouteData from './RouteData'
 const MainPageRoute = () =>{
 
     return(
-        // <Suspense fallback={<Loader/>}>
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loader/>}>
+         {/* <Suspense fallback={<div>Loading...</div>}> */}
             <RouteData/>
         </Suspense>
     );

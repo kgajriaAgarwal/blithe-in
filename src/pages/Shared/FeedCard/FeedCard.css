@@ -6,4 +6,5 @@
     object-fit: contain ;
     height: 25rem ;
     position: relative;
+    cursor: pointer;
 }

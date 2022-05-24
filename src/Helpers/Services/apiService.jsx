@@ -70,7 +70,8 @@ const injectParamsToUrl = (_url_, paramObj) => {
 // };
 
 const injectHeadersToReq = async (_headers_) => {
-  let userInfo = await getLocalStorage('authData');
+  // let userInfo = await getLocalStorage('authData');
+  let userInfo = await localStorage.getItem('authData')
 
   if (userInfo) {    
     _headers_['authorization'] = userInfo
