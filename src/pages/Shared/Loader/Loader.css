@@ -4,7 +4,8 @@
   left: 0;
   background: #666;
   opacity: 0.8;
-  z-index: 9999999999;
+  z-index: 2;
+  /* 9999999999 */
   height: 100%;
   width: 100%;
 }

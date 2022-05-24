@@ -78,7 +78,6 @@ const ProfileData = (props) => {
             <Avatar
               alt={userDetailsData?.firstName}
               src={userDetailsData?.profilePic}
-              // sx={{ width: "30%", height: "30%" }}
               className="user-avatar"
             />
 
@@ -176,10 +175,6 @@ const ProfileData = (props) => {
                   <Typography variant="body2">
                     {userDetailsData?.workPlace}
                   </Typography>
-                  {/* <Typography variant="body2">
-                    Feb 2021 - Present · 1 yr 3 mos
-                  </Typography> */}
-                  {/* <Typography variant="body4">Indore, MP, India</Typography> */}
                   <Stepper orientation="vertical">
                     {userDetailsData?.workExperience.map((experience, index) => (
                       <Step key={index} active={false} expanded={true}>
@@ -187,11 +182,6 @@ const ProfileData = (props) => {
                           icon={<CircleIcon />}
                           className="step-label"
                           id="step-label"
-                          // optional={
-                          //     index === 2 ? (
-                          //     <Typography variant="caption">Last step</Typography>
-                          //     ) : null
-                          // }
                         >
                           {experience.workplace}
                         </StepLabel>
@@ -205,15 +195,6 @@ const ProfileData = (props) => {
                 </Box>
               </Box>
               <Divider />
-              {/* <Box className="experience-item">
-                <PeopleAltIcon />
-                <Typography variant="body2">
-                  LMS Solutions (India) Pvt. Ltd. · Full-time
-                </Typography>
-                <Typography variant="body2">
-                  Feb 2021 - Present · 1 yr 3 mos
-                </Typography>
-              </Box> */}
             </Box>
           </Box>
 
@@ -223,22 +204,6 @@ const ProfileData = (props) => {
               Education
             </Typography>
             <Box className="experience-details-box">
-              {/* <Box className="experience-item"> */}
-                {/* <PeopleAltIcon /> */}
-                {/* <Box>
-                  <Typography variant="body1">
-                    Software Developer(react js)
-                  </Typography>
-                  <Typography variant="body2">
-                    LMS Solutions (India) Pvt. Ltd. · Full-time
-                  </Typography>
-                  <Typography variant="body2">
-                    Feb 2021 - Present · 1 yr 3 mos
-                  </Typography>
-                  <Typography variant="body4">Indore, MP, India</Typography>
-                </Box> */}
-              {/* </Box> */}
-              {/* <Divider /> */}
               <Box className="experience-item">
               <Stepper orientation="vertical">
                     {userDetailsData?.educationHistory.map((edu, index) => (
@@ -247,11 +212,6 @@ const ProfileData = (props) => {
                           icon={<CircleIcon />}
                           className="step-label"
                           id="step-label"
-                          // optional={
-                          //     index === 2 ? (
-                          //     <Typography variant="caption">Last step</Typography>
-                          //     ) : null
-                          // }
                         >
                           {edu.education}
                         </StepLabel>

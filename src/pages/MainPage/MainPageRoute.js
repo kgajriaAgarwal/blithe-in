@@ -3,7 +3,6 @@ import { Loader } from '../Shared';
 import RouteData from './RouteData'
 // import PrivateRoute from './PrivateRoute';
 
-
 const MainPageRoute = () =>{
 
     return(

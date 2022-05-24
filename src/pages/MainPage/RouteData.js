@@ -26,14 +26,12 @@ const RouteData = () =>{
            <Route exact path='/user' element={<PrivateRoute/>}>                
               {/* <Route exact path="/user/profile/:id"  element={<UserProfile/>}/>  */}
             </Route>
-             {/*<Route exact path="/video/:videoId"  element={<Video/>}/> 
-            <Route exact path="/videos/:categoryId"  element={<VideoListingPage/>}/>  */}
-            {/* <Route exact path='/profile' element={<UserProfile/>}/> */}
             <Route exact path="/profile/:userId"  element={<UserProfile/>}/>
             <Route exact path="/posts/user/:username"  element={<FeedsPage/>}/>
             <Route exact path="/post/:postId"  element={<FeedDetailsPage/>}/> 
             <Route exact path='/home' element={<FeedsPage/>}/>
             <Route exact path='/' element={<FeedsPage/>}/>
+            <Route exact path='*' element={<NoMatch/>}/>
         </Routes>
    );
 }
