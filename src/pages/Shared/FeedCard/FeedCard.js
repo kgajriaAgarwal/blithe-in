@@ -18,11 +18,16 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import "./FeedCard.css";
-import { CssBaseline, Divider } from "@mui/material";
+import { Button, CssBaseline, Divider } from "@mui/material";
 import { getLocalStorage } from "../../../Helpers/Common/utils";
 import bgImg from '../../../Assets/Images/bg.gif';
 import { useNavigate } from "react-router-dom";
-// import { Navigate } from "react-router-dom";
+import { Box } from "@mui/system";
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { useDispatch } from "react-redux";
+import { deletePost } from "../../../app/slice/postSlice";
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { openPostModal } from "../../../app/slice/addPostModalSlice";
 
 const ExpandMore = styled((props) => {
     const {
@@ -39,9 +44,13 @@ const ExpandMore = styled((props) => {
 export const FeedCard = (props) => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {feed} = props;
     
     const [expanded, setExpanded] = React.useState(false);
+    const [actionsOpen, setActionsOpen] = React.useState(false);
+    const userData = getLocalStorage("userData");
+
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -52,8 +61,6 @@ export const FeedCard = (props) => {
             "aria-label": "Checkbox demo"
         }
     };
-
-
     return (
         <>
         <CssBaseline/>
@@ -68,25 +75,38 @@ export const FeedCard = (props) => {
                     aria-label="recipe">
                     R</Avatar>}
                 action={
-                    <IconButton
-                aria-label="settings"><MoreVertIcon/></IconButton>
+                <Box className="action-box">
+                <IconButton aria-label="settings" >
+                    <BookmarkIcon/>
+                </IconButton>
+                {userData?.username === feed.username ?
+                <Box className="action-box">
+                    <Button aria-label="settings" onClick={()=> setActionsOpen(!actionsOpen)}>
+                        {actionsOpen?<ChevronRightIcon/>:<MoreVertIcon className="action-btn"/>}
+                    </Button>
+                        {actionsOpen?<Box >
+                            <Button  onClick={()=> dispatch(openPostModal({feed: feed,is_module:'EDIT'}))}>Edit</Button>
+                            <Button onClick={()=> dispatch(deletePost(feed._id)) }>Delete</Button>
+                    </Box>:''}
+                </Box>
+                :null}
+                </Box>
                 }
                 title={<Typography variant="h6" color="text.secondary">{feed.username}</Typography>}
                 subheader={<Typography color="text.primary">{feed.createdAt}</Typography>}
                 className="card-header"
-                // color="primary"
-                // color="secondary"
                 id="card-header"
             /> 
-            <CardMedia component="img"
-                // height="20%"
-                image={feed.postImage}
-                alt={feed.title}
+            {feed?.postImage?
+                <CardMedia component="img"
+                image={feed?.postImage}
+                alt={feed?.title}
                 id="feedcard-img"
                 className="feedcard-img"
-                //onClick={ () => navigate("/", {state:{id: feed._id,module:'postDetails'}})}
                 onClick={()=> navigate(`/post/${feed._id}`)}
                />
+            :''}
+            
             <CardContent>
                 <Typography variant="h6" color="text.secondary">{feed.title}</Typography>
                 <Typography variant="body2" color="text.primary">

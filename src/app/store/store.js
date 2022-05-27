@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { authReducer, postReducer, userReducer } from "../slice";
-// import authReducer from "../slice/authSlice";
+import { authReducer, postModalReducer, postReducer, userReducer } from "../slice";
 
 
 export const store = configureStore({
@@ -8,5 +7,6 @@ export const store = configureStore({
       auth: authReducer,
       user: userReducer,
       post: postReducer,
+      postModal: postModalReducer,
     },
   });

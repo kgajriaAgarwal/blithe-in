@@ -55,10 +55,7 @@ actionLogin: {
     method: 'GET',
     data: {},
     headers: {
-      // 'Accept': '*/*',
       'Content-Type': 'application/json', 
-      // 'Content-Type': 'application/json',
-      // 'authorization': encodedToken
     }, 
     showResultMessage: false,
     showErrorMessage: false,
@@ -85,10 +82,6 @@ actionLogin: {
     method: 'GET',
     data: {},
     headers: {
-      // 'Accept': '*/*',
-      // 'Content-Type': 'application/json', 
-      // 'Content-Type': 'application/json',
-      // 'authorization': encodedToken
       'Content-Type': 'application/json'
     }, 
     showResultMessage: false,
@@ -101,17 +94,53 @@ actionLogin: {
     method: 'GET',
     data: {},
     headers: {
-      // 'Accept': '*/*',
-      // 'Content-Type': 'application/json', 
-      // 'Content-Type': 'application/json',
-      // 'authorization': encodedToken
       'Content-Type': 'application/json'
     }, 
     showResultMessage: false,
     showErrorMessage: false,
   },
 
+  //createPost
+  createPost:{
+    url: '/posts',
+      method: 'POST',
+      data: {
+        postData:{}
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
 
+  //actionDeletePost
+  actionDeletePost:{
+    url: '/posts/:postId',
+      method: 'DELETE',
+      data: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
 
+  //actionEditPost --> This API call edits a post of the user.
+  actionEditPost:{
+    url: '/posts/edit/:postId',
+      method: 'POST',
+      data: {
+        postData:{}
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
 
 }

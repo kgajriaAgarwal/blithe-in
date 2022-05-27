@@ -81,7 +81,6 @@ const injectHeadersToReq = async (_headers_) => {
 };
 
 const handleErrorByStatus = (error) => {
-console.log("error:", error);
   if (error && error.data.error) {
     if(error.status === 401){
         console.log("error..", error)

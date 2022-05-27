@@ -2,13 +2,26 @@ import { Fab , Tooltip} from '@mui/material';
 import React, { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { AddPostModal } from '../index';
+import { getLocalStorage, showErrorToast } from '../../../Helpers/Common/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { closePostModal, openPostModal } from '../../../app/slice/addPostModalSlice';
 
 export const AddPost = (props) =>{
 
-    const [open , setOpen] = useState(false);
+    const dispatch = useDispatch();
+    const dataa = useSelector((state) => state.postModal);
+    const [open , setOpen] = useState(dataa.addPostModal);
+    // const authData = getLocalStorage("authData")? getLocalStorage("authData") :'' ;
+    const authData = localStorage.getItem("authData");
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleOpen = () => {
+        authData && authData.length ? 
+            dispatch(openPostModal({feed: {},is_module:'ADD'}))
+         : showErrorToast("To add a post.Kindly Login!!")
+    };
+    
+    const handleClose = () => dispatch(closePostModal());
+   
 
     return(
         <>
@@ -21,7 +34,9 @@ export const AddPost = (props) =>{
                     <AddIcon  color='secondary'/>
                 </Fab>
             </Tooltip>
-            <AddPostModal open={open} handleClose={handleClose} />
+            {authData?
+            <AddPostModal open={dataa?.addPostModal} handleClose={handleClose} setOpen={setOpen} dataa={dataa}/>
+            :""}
         </>
     );
 }

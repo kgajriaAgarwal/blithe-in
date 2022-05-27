@@ -120,7 +120,7 @@ const Login = () => {
       }
       
     } else {
-      login_Data = { email: values.email, password: values.password };
+      login_Data = { username: values.username, password: values.password };
     }
 
     dispatch(loginUser(login_Data)).unwrap()

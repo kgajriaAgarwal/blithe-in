@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllPosts, getAllUsers, getPostById, getPostByUsername, getUserById } from "../../Helpers/Services/actions"; 
-// import { updateUser } from "../Auth/authSlice";
+import axios from "axios";
+import { actionDeletePost, actionEditPost, createPost, getAllPosts, getAllUsers, getPostById, getPostByUsername, getUserById } from "../../Helpers/Services/actions"; 
 
 const initialState = {
   status:'idle', // 'idle' | 'loading' | 'suceeded' | 'failed'
@@ -38,6 +38,47 @@ export const getPosts = createAsyncThunk(
     async ( username , thunkAPI) => {
       try {
           const response = await getPostByUsername(username);
+          return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+
+  //createPost
+  export const actionCreatePost = createAsyncThunk(
+    "post/actionCreatePost",
+    async ( data , thunkAPI) => {
+      try {
+          const response = await createPost({postData: data});
+          return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  ////actionDeletePost
+  export const deletePost = createAsyncThunk(
+    "post/deletePost",
+    async (post_id , thunkAPI) => {
+      try {
+          const response = await actionDeletePost({postId: post_id});
+          return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+
+  //actionEditPost
+  export const editPost = createAsyncThunk(
+    "post/editPost",
+    async ( data , thunkAPI) => {
+      try {
+          const response = await actionEditPost({postData: data?.postData, postId: data?.postId});
           return response.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
@@ -117,6 +158,108 @@ export const getPosts = createAsyncThunk(
           error: action.error.message,
         };
       },
+
+
+      //actionCreatePost
+      [actionCreatePost.pending]: (state, action) => {
+        state.posts = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+      },
+      [actionCreatePost.fulfilled]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+      },
+      [actionCreatePost.rejected]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+      //deletePost
+      [deletePost.pending]: (state, action) => {
+        state.posts = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+        state.userPosts = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+      },
+      [deletePost.fulfilled]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        state.userPosts = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+      },
+      [deletePost.rejected]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+        state.userPosts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+      //actionEditPost
+      [editPost.pending]: (state, action) => {
+        state.posts = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+        // state.userPosts
+        state.userPosts = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+      },
+      [editPost.fulfilled]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        state.userPosts = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+      },
+      [editPost.rejected]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+        state.userPosts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
     }
   })
   

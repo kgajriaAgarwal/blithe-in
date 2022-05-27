@@ -54,13 +54,13 @@ export const validateSignUp = (data) => {
     };
   };
 
-  export const validateCreateNote = (data) => {
+  export const validateCreatePost = (data) => {
     let errors = {};
     if (isBlank(data.title)) {
         errors.title = validationMessages.fieldRequired.required;
     }
-    if (isBlank(data.description)) {
-        errors.description = validationMessages.fieldRequired.required;
+    if (isBlank(data.content)) {
+        errors.content = validationMessages.fieldRequired.required;
     }
   
     return {

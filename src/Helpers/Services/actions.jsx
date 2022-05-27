@@ -7,7 +7,8 @@ export const actionLogin = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
   return response;
   }else{
-    showErrorToast(response.data.errors[0])
+    console.log("response.data.errors:", response.data.errors);
+    // showErrorToast(response.data.errors[0])
   }
 };
 
@@ -21,7 +22,8 @@ export const actionSignup = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      showErrorToast(response.data.errors[0])
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
     }
 };
 
@@ -74,6 +76,41 @@ export const getPostById = async (data) => {
 //getPostByUsername
 export const getPostByUsername = async (data) => {
   const response = await mainApiService("getPostByUsername", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};
+
+
+//This API call creates a new post to the user's db.
+export const createPost = async (data) => {
+  const response = await mainApiService("createPost", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};
+
+
+//actionDeletePost
+export const actionDeletePost = async (data) => {
+  const response = await mainApiService("actionDeletePost", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+  }
+};
+
+////actionEditPost
+export const actionEditPost = async (data) => {
+  const response = await mainApiService("actionEditPost", data);
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{

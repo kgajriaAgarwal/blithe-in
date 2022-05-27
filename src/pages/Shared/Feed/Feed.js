@@ -26,7 +26,6 @@ export const Feed = (props) => {
         dispatch(getPosts());
       }, []);
 
-
     const  showFeedsData = (feedsArr) => {
         if(feedsArr.length){
             return feedsArr.map(feed => <FeedCard key={feed._id} feed ={feed}/>)
@@ -38,11 +37,14 @@ export const Feed = (props) => {
 
     const showFeeds = () => {
         if( username && username?.username?.length && data && data?.userPosts?.data?.posts?.length && data?.userPosts?.status !== "loading"){
-            return showFeedsData(data?.userPosts?.data?.posts)//data.userPosts.data.posts
+            return showFeedsData(data?.userPosts?.data?.posts)
         }else{
-            if(data && data?.posts?.data?.length){
+            if(data && data?.posts?.data?.length && data &&  data?.posts?.status !== "loading"){
                 return showFeedsData(data?.posts?.data)
-            }else{
+            }if( data && data?.posts?.data?.posts?.length && data?.posts?.status !== "loading"){
+                return showFeedsData(data?.posts?.data?.posts)
+            }
+            else{
                 return ''
             } 
         }
