@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { showSuccessToast } from "../../Helpers/Common/utils";
 import { actionDeletePost, actionEditPost, createPost, getAllPosts, getAllUsers, getPostById, getPostByUsername, getUserById } from "../../Helpers/Services/actions"; 
 
 const initialState = {
@@ -174,6 +175,7 @@ export const getPosts = createAsyncThunk(
           data: action.payload,
           error: {},
         };
+        showSuccessToast("Post created successfully!!")
       },
       [actionCreatePost.rejected]: (state, action) => {
         state.posts = {
@@ -207,6 +209,7 @@ export const getPosts = createAsyncThunk(
           data: action.payload,
           error: {},
         };
+        showSuccessToast("Post deleted successfully!!")
       },
       [deletePost.rejected]: (state, action) => {
         state.posts = {
@@ -246,6 +249,7 @@ export const getPosts = createAsyncThunk(
           data: action.payload,
           error: {},
         };
+        showSuccessToast("Post updated successfully!!")
       },
       [editPost.rejected]: (state, action) => {
         state.posts = {
