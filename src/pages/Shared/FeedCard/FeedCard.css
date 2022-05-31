@@ -13,3 +13,62 @@
 .action-box{
     display: flex;
 } 
+
+.feed-icon-btn{
+    background-color: aquamarine;
+}
+
+.comment-input-box{
+    display: flex;
+    width: 100%;
+    /* background-color: aqua; */
+    /* justify-content: center;
+    align-items: center; */
+    justify-content: space-between;
+    gap: 10px;
+}
+
+/* #comment-input */
+.comment-input{
+    margin-left: 10px;
+    padding-left: 10px;
+    /* background-color: brown; */
+    width: 90%;
+    border: 2px solid var(--primary-bg);
+}
+
+#btn-post.btn-post{
+    height: 2.5rem;
+}
+
+.comments-box{
+    /* background-color: aquamarine; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.comment{
+    /* background-color: aqua; */
+    display: flex;
+    gap:10px;
+}
+
+.comment-action-box{
+    /* height: 20px; */
+    display: flex;
+    /* width: 14%; */
+}
+
+.action-icon-btn{
+    height:2rem;
+    background-color: blueviolet;
+}
+
+.comment-action-box-container{
+    display: flex;
+    flex-direction: column;
+    background-color: blueviolet;
+    justify-content: space-between;
+}

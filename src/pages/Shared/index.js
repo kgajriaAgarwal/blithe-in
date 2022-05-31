@@ -8,6 +8,8 @@ import { AddPostModal } from "./AddPostModal/AddPostModal";
 import { Loader } from "./Loader/Loader";
 import { SwipeableStepper } from "./SwipeableStepper/SwipeableStepper";
 import { Input } from "./Input/Input";
+import { Comment } from './Comment/Comment';
+import { SingleComment } from "./SingleComment/SingleComment";
 
 
 export {
@@ -20,5 +22,7 @@ export {
     AddPostModal,
     Loader,
     Input,
-    SwipeableStepper
+    Comment,
+    SingleComment,
+    SwipeableStepper,
     };

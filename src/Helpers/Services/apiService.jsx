@@ -15,7 +15,7 @@ import {getLocalStorage} from '../Common/utils';
 
 let apiFailCounter = 0;
 // axios.defaults.baseURL = CONSTANTS.baseUrl;
-axios.defaults.baseURL = "/api";
+//axios.defaults.baseURL = "/api";
  
 axios.interceptors.request.use(
   function (config) {
@@ -112,6 +112,7 @@ const mainApiService = async (apiKeyName, data) => {
 
   return axios(requestObject)
     .then(function (result) {
+        debugger
         console.log("resulttt@@:", result)
       apiFailCounter = 0;
       if (result.data && result) {

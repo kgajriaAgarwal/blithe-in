@@ -9,6 +9,7 @@ export const actionLogin = async (data) => {
   }else{
     console.log("response.data.errors:", response.data.errors);
     // showErrorToast(response.data.errors[0])
+    showErrorToast("Unexpected error")
   }
 };
 
@@ -24,10 +25,11 @@ export const actionSignup = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
     }
 };
 
-//USERS
+//USERS ROUTE
 
 //action to get All users
 export const getAllUsers = async (data) => {
@@ -37,10 +39,11 @@ export const getAllUsers = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };
 
-//action to get All users
+//action to get USER BY ID
 export const getUserById = async (data) => {
   const response = await mainApiService("getUserById", data);
   if (response.data &&(response.status === 201 || response.status === 200)) {
@@ -48,10 +51,12 @@ export const getUserById = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };
 
-//POSTS
+//POSTS ROUTE
+//GET ALL POSTS
 export const getAllPosts = async (data) => {
   const response = await mainApiService("getAllPosts", data);
   if (response.data &&(response.status === 201 || response.status === 200)) {
@@ -59,10 +64,11 @@ export const getAllPosts = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };
 
-//getPostById
+//GET POST BY ID
 export const getPostById = async (data) => {
   const response = await mainApiService("getPostById", data);
   if (response.data &&(response.status === 201 || response.status === 200)) {
@@ -70,6 +76,7 @@ export const getPostById = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };
 
@@ -81,6 +88,7 @@ export const getPostByUsername = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };
 
@@ -93,6 +101,7 @@ export const createPost = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };
 
@@ -105,6 +114,7 @@ export const actionDeletePost = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };
 
@@ -116,5 +126,80 @@ export const actionEditPost = async (data) => {
     }else{
       console.log("response.data.errors:", response.data.errors);
       // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+
+//COMMENTS ROUTE
+//ACTION - GET ALL COMMENTS
+export const actionGetAllComments = async (data) => {
+  const response = await mainApiService("actionGetAllComments", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionDddComment
+export const actionAddComment = async (data) => {
+  const response = await mainApiService("actionAddComment", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionEditComment
+export const actionEditComment = async (data) => {
+  const response = await mainApiService("actionEditComment", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionDeleteComment
+export const actionDeleteComment = async (data) => {
+  const response = await mainApiService("actionDeleteComment", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionUpvoteComment
+export const actionUpvoteComment = async (data) => {
+  const response = await mainApiService("actionUpvoteComment", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionDownvoteComment
+export const actionDownvoteComment = async (data) => {
+  const response = await mainApiService("actionDownvoteComment", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
   }
 };

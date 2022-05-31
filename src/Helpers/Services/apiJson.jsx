@@ -6,7 +6,7 @@ export const ApiJson = {
 
 //ACTION TO LOGIN
 actionLogin: {
-  url: '/auth/login',
+  url: '/api/auth/login',
   method: 'POST',
   data: {
     "username": "",
@@ -21,7 +21,7 @@ actionLogin: {
 
   //ACTION TO SIGN UP
   actionSignup: {
-    url: '/auth/signup',
+    url: '/api/auth/signup',
     method: 'POST',
     data: {
       "firstName":'',
@@ -38,7 +38,7 @@ actionLogin: {
 
     //ACTION TO get All Users
     getAllUsers: {
-      url: '/users',
+      url: '/api/users',
       method: 'GET',
       data: {},
       headers: {
@@ -51,7 +51,7 @@ actionLogin: {
 
   //Action to get User By Id -- This API call gets a user from the db
   getUserById: {
-    url: '/users/:userId',
+    url: '/api/users/:userId',
     method: 'GET',
     data: {},
     headers: {
@@ -64,7 +64,7 @@ actionLogin: {
 
   //POSTS
   getAllPosts: {
-    url: '/posts',
+    url: '/api/posts',
     method: 'GET',
     data: {},
     headers: {
@@ -78,7 +78,7 @@ actionLogin: {
 
   //Action to get Post By Id -- This API call gets a user from the db
   getPostById: {
-    url: '/posts/:postId',
+    url: '/api/posts/:postId',
     method: 'GET',
     data: {},
     headers: {
@@ -90,7 +90,7 @@ actionLogin: {
 
   //Action to get posts by username -- This API call gets posts by username from the db.
   getPostByUsername: {
-    url: '/posts/user/:username',
+    url: '/api/posts/user/:username',
     method: 'GET',
     data: {},
     headers: {
@@ -102,7 +102,7 @@ actionLogin: {
 
   //createPost
   createPost:{
-    url: '/posts',
+    url: '/api/posts',
       method: 'POST',
       data: {
         postData:{}
@@ -117,7 +117,7 @@ actionLogin: {
 
   //actionDeletePost
   actionDeletePost:{
-    url: '/posts/:postId',
+    url: '/api/posts/:postId',
       method: 'DELETE',
       data: {},
       headers: {
@@ -130,11 +130,97 @@ actionLogin: {
 
   //actionEditPost --> This API call edits a post of the user.
   actionEditPost:{
-    url: '/posts/edit/:postId',
+    url: '/api/posts/edit/:postId',
       method: 'POST',
       data: {
         postData:{}
       },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
+
+  //COMMENTS ROUTE
+  //actionGetAllComments
+  actionGetAllComments: {
+    url: '/api/comments/:postId',
+    method: 'GET',
+    data: {},
+    headers: {
+      'Content-Type': 'application/json'
+    }, 
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+
+
+  //actionAddComment --> This API adds a comment to a particualar post.
+  actionAddComment:{
+    url: '/api/comments/add/:postId',
+      method: 'POST',
+      data: {
+        // commentData:{}
+        commentData: {}
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
+
+
+  //actionEditComment
+  actionEditComment:{
+    url: '/api/comments/edit/:postId/:commentId',
+      method: 'POST',
+      data: {
+        // commentData:{}
+        commentData: {}
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
+
+  //actionDeleteComment
+  actionDeleteComment:{
+    url: '/api/comments/delete/:postId/:commentId',
+      method: 'POST',
+      data: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
+
+  //actionUpvoteComment
+  actionUpvoteComment:{
+    url: '/api/comments/upvote/:postId/:commentId',
+      method: 'POST',
+      data: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
+
+  //actionDownvoteComment
+  actionDownvoteComment:{
+    url: '/api/comments/downvote/:postId/:commentId',
+      method: 'POST',
+      data: {},
       headers: {
         'Content-Type': 'application/json',
         'authorization': encodedToken

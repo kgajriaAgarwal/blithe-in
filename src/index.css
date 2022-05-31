@@ -31,4 +31,5 @@ body {
     --darkgray-color: darkgray;
     --whitepeach-color:#f4efef;
     --darkyellow-color:#ff9800;
+    --gray: rgba(0, 0, 0, 0.06)
 }

@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { showSuccessToast } from "../../Helpers/Common/utils";
-import { actionDeletePost, actionEditPost, createPost, getAllPosts, getAllUsers, getPostById, getPostByUsername, getUserById } from "../../Helpers/Services/actions"; 
+import { actionAddComment, actionDeleteComment, actionDeletePost, actionDownvoteComment, actionEditComment, actionEditPost, actionGetAllComments, actionUpvoteComment, createPost, getAllPosts, getAllUsers, getPostById, getPostByUsername, getUserById } from "../../Helpers/Services/actions"; 
 
 const initialState = {
   status:'idle', // 'idle' | 'loading' | 'suceeded' | 'failed'
@@ -81,6 +81,83 @@ export const getPosts = createAsyncThunk(
       try {
           const response = await actionEditPost({postData: data?.postData, postId: data?.postId});
           return response.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  //COMMENTS ROUTE
+  //GET ALL COMMNETS //actionGetAllComments
+  export const getComments = createAsyncThunk(
+    "post/getComments",
+    async ( post_id, thunkAPI) => {
+      try {
+        const response = await actionGetAllComments({postId: post_id});
+        return response?.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  //ADD COMMENT
+  export const addComment = createAsyncThunk(
+    "post/addComment",
+    async (data, thunkAPI) => {
+      try {
+        const response = await actionAddComment({postId: data?.postId, commentData: data?.commentData});
+        return response?.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  //EDIT COMMENT
+  export const editComment = createAsyncThunk(
+    "post/editComment",
+    async (data, thunkAPI) => {
+      try {
+        const response = await actionEditComment({postId: data?.postId,commentId: data?.commentId, commentData: data?.commentData});
+        return response?.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  //actionDeleteComment
+  export const deleteComment = createAsyncThunk(
+    "post/deleteComment",
+    async (data, thunkAPI) => {
+      try {
+        const response = await actionDeleteComment({postId: data?.postId,commentId: data?.commentId});
+        return response?.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  export const upvoteComment = createAsyncThunk(
+    "post/upvoteComment",
+    async (data, thunkAPI) => {
+      try {
+        const response = await actionUpvoteComment({postId: data?.postId,commentId: data?.commentId});
+        return response?.data;
+      } catch (error) {
+        return thunkAPI.rejectWithValue(error);
+      }
+    }
+  );
+
+  export const downvoteComment = createAsyncThunk(
+    "post/downvoteComment",
+    async (data, thunkAPI) => {
+      try {
+        const response = await actionDownvoteComment({postId: data?.postId,commentId: data?.commentId});
+        return response?.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
       }
@@ -258,6 +335,168 @@ export const getPosts = createAsyncThunk(
           error: action.error.message,
         };
         state.userPosts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+      //COMMENT ROUTE
+      //getComments
+      [getComments.pending]: (state, action) => {
+        state.comments = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+      },
+      [getComments.fulfilled]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+      },
+      [getComments.rejected]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+      //addComment
+      [addComment.pending]: (state, action) => {
+        state.posts = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+        // state.userPosts
+        state.userPosts = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+      },
+      [addComment.fulfilled]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        state.userPosts = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        showSuccessToast("comment added successfully!!")
+      },
+      [addComment.rejected]: (state, action) => {
+        state.posts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+        state.userPosts = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+      //editComment
+      [editComment.pending]: (state, action) => {
+        state.comments = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+        
+      },
+      [editComment.fulfilled]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        showSuccessToast("comment updated successfully!!")
+      },
+      [editComment.rejected]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+      // deleteComment
+      [deleteComment.pending]: (state, action) => {
+        state.comments = {
+          status: "loading",
+          data: {},
+          error: {},
+        };        
+      },
+      [deleteComment.fulfilled]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        showSuccessToast("comment deleted successfully!!")
+      },
+      [deleteComment.rejected]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+      // upvoteComment
+      [upvoteComment.pending]: (state, action) => {
+        state.comments = {
+          status: "loading",
+          data: {},
+          error: {},
+        };        
+      },
+      [upvoteComment.fulfilled]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        showSuccessToast("comment upvoted!!")
+      },
+      [upvoteComment``.rejected]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+
+       // downvoteComment
+       [downvoteComment.pending]: (state, action) => {
+        state.comments = {
+          status: "loading",
+          data: {},
+          error: {},
+        };        
+      },
+      [downvoteComment.fulfilled]: (state, action) => {
+        state.comments = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+        showSuccessToast("comment downvoted")
+      },
+      [downvoteComment.rejected]: (state, action) => {
+        state.comments = {
           status: "idle",
           data: {},
           error: action.error.message,
