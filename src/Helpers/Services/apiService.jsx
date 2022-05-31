@@ -112,7 +112,6 @@ const mainApiService = async (apiKeyName, data) => {
 
   return axios(requestObject)
     .then(function (result) {
-        debugger
         console.log("resulttt@@:", result)
       apiFailCounter = 0;
       if (result.data && result) {

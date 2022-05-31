@@ -40,7 +40,6 @@ const CommentBoxContainer = styled(Card)(({ theme }) => ({
      //handleEditCommentInput
   const handleEditCommentInput = () => {
     if (commentInputData.length) {
-      debugger;
       dispatch(
         editComment({
           postId: post_id,
