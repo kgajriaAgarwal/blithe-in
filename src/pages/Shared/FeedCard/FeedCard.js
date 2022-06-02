@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useEffect, useState} from "react";
 import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import Checkbox from "@mui/material/Checkbox";
@@ -18,17 +18,18 @@ import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import "./FeedCard.css";
 import { Button, CssBaseline, Divider, Stack, TextField } from "@mui/material";
-import { getLocalStorage } from "../../../Helpers/Common/utils";
+import { getLocalStorage, showSuccessToast } from "../../../Helpers/Common/utils";
 import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/system";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { useDispatch } from "react-redux";
-import { addComment, deletePost } from "../../../app/slice/postSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addComment, bookmarkingPost, deletePost,  likeAndDislikePost } from "../../../app/slice/postSlice";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import { openPostModal } from "../../../app/slice/addPostModalSlice";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { v4 as uuid } from "uuid";
 import { Comment } from "../Comment/Comment";
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -45,14 +46,19 @@ export const FeedCard = (props) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { feed } = props;
-
-  //console.table(feed);
-
   const [expanded, setExpanded] = React.useState(false);
   const [actionsOpen, setActionsOpen] = React.useState(false);
   const [commentActionsOpen, setCommentActionsOpen] = React.useState(false);
   const userData = getLocalStorage("userData");
+  const isLiked = feed?.likes?.likedBy?.some(el => userData?.username === el.username)
+  const data = useSelector((state) => state.post);
+  const is_bookmark = (data  && data?.bookmarks?.data?.bookmarks && data?.bookmarks?.status!=='loading') ? data?.bookmarks?.data?.bookmarks.some(el => feed?.username === el.username && feed._id === el._id): false;
   const [commentInputData, setCommentInputData] = React.useState("");
+
+  //      useEffect(()=> {
+  //   // setComment_data(dataa?.comments?.data?.comments )
+  //       console.log("data is in feed card.js:", data);
+  // }, [data  && data?.bookmarks?.data?.bookmarks && data?.bookmarks?.status!=='loading'])
 
   const handleCommentInput = () => {
     if (commentInputData.length) {
@@ -73,6 +79,16 @@ export const FeedCard = (props) => {
     }
   };
 
+  const handleLikeDislikePost = (e) =>{
+    dispatch(likeAndDislikePost({ postId: feed._id, isLike: isLiked ? false : true }));
+  }
+
+  const handleBookmark = () => {
+    dispatch(bookmarkingPost({ postId: feed._id, isBookmark: is_bookmark ? false : true })).unwrap().then(()=>{
+      showSuccessToast(is_bookmark?"Post removed from bookmarks":"Post bookmarked successfully!!")
+    })
+  }
+
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -82,6 +98,8 @@ export const FeedCard = (props) => {
       "aria-label": "Checkbox demo",
     },
   };
+
+
   return (
     <>
       <CssBaseline />
@@ -94,9 +112,14 @@ export const FeedCard = (props) => {
           }
           action={
             <Box className="action-box">
-              <IconButton aria-label="settings">
-                <BookmarkIcon />
-              </IconButton>
+            <Checkbox
+              {...label}
+              icon={<BookmarkBorderIcon />}
+              checkedIcon={<BookmarkIcon />}
+              checked={is_bookmark }
+              onChange={ handleBookmark}
+            />
+          {/* </IconButton> */}
               {userData?.username === feed.username ? (
                 <Box className="action-box">
                   <Button
@@ -163,17 +186,20 @@ export const FeedCard = (props) => {
         </CardContent>
         <Divider />
         <CardActions disableSpacing>
-          <IconButton aria-label="add to favorites" className="feed-icon-btn">
             <Checkbox
               {...label}
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite />}
+              checked={isLiked }
+              onChange={ handleLikeDislikePost}
             />
-          </IconButton>
+          <Typography variant="h6" color="text.secondary">
+            {feed?.likes?.likeCount}
+          </Typography>
           <IconButton
             aria-label="share"
             className="feed-icon-btn"
-            sx={{ paddingLeft: "10px", paddingRight: "10px" }}
+            sx={{ marginLeft:'1.5rem' }}
           >
             <ShareIcon />
           </IconButton>
@@ -182,9 +208,13 @@ export const FeedCard = (props) => {
           <IconButton
             aria-label="comment"
             className="feed-icon-btn"
-            sx={{ paddingLeft: "20px" }}
+            sx={{  marginLeft:'1rem'}}
+            onClick={handleExpandClick}
           >
             <ChatBubbleOutlineIcon />
+            <Typography variant="h6" color="text.secondary" ml={2}>
+              {feed?.comments?.length}
+            </Typography>
           </IconButton>
           <ExpandMore
             expand={expanded}

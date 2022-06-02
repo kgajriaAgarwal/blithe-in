@@ -203,3 +203,64 @@ export const actionDownvoteComment = async (data) => {
       showErrorToast("Unexpected error")
   }
 };
+
+//actionLikeComment
+export const actionLikePost = async (data) => {
+  const response = await mainApiService("actionLikePost", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+export const actionDislikePost = async (data) => {
+  const response = await mainApiService("actionDislikePost", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionGetAllBookmarks
+export const actionGetAllBookmarks = async (data) => {
+  const response = await mainApiService("actionGetAllBookmarks", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionBookmarkPost
+export const actionBookmarkPost = async (data) => {
+  const response = await mainApiService("actionBookmarkPost", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+
+
+//actionRemoveBookmarkPost
+export const actionRemoveBookmarkPost = async (data) => {
+  const response = await mainApiService("actionRemoveBookmarkPost", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};

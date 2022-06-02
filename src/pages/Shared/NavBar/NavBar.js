@@ -14,11 +14,12 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import PublicIcon from '@mui/icons-material/Public';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../../../app/slice/authSlice';
 import { getUserDetailsByID } from '../../../app/slice/userSlice';
 import { getLocalStorage } from '../../../Helpers/Common/utils';
+import BookmarkIcon from "@mui/icons-material/Bookmark";
 
 const StyledToolbar = styled(Toolbar)({
     display: 'flex',
@@ -72,7 +73,8 @@ export const NavBar = (props) =>  {
         const [open, setOpen] = useState(false);
         const navigate = useNavigate();
         const dispatch = useDispatch();
-         const id = dataa?.user?._id ? dataa?.user?._id :'';
+        const location = useLocation();
+        const id = dataa?.user?._id ? dataa?.user?._id :'';
 
         const userData = getLocalStorage("userData")
 
@@ -93,7 +95,7 @@ export const NavBar = (props) =>  {
                     <Tabs 
                         className='tab'
                         indicatorColor="secondary"
-                        value={'/jobs'} 
+                        // value={'/jobs'} 
                         aria-label="icon label tabs example"
                         selectionFollowsFocus
                         // value={value}
@@ -101,16 +103,26 @@ export const NavBar = (props) =>  {
                         variant="fullWidth"
                         textColor="secondary"
                         color='white'
+                        // value={
+                        //     history.location.pathname !== "/"
+                        //       ? history.location.pathname
+                        //       : false
+                        //   }
+                        value={
+                            location.pathname !== "/"
+                              ? location.pathname
+                              : false
+                          }
                         >
-                        
-                
                         <CustomTab icon={<Badge badgeContent={4} color="error" >
                             <Tooltip title="Home" color='white'>
                                 <HomeIcon />
                             </Tooltip>
                         </Badge>} 
                         // label="Home" 
-                        value="/"
+                        // value="/"
+                        component={Link}
+                        to={"/"}
                         />
                          
                         <CustomTab icon={<Badge badgeContent={4} color="error">
@@ -119,7 +131,7 @@ export const NavBar = (props) =>  {
                             </Tooltip>
                         </Badge>} 
                         // label="Home" 
-                        value="/my-network"
+                        value="/"
                         />
                         
 
@@ -129,26 +141,30 @@ export const NavBar = (props) =>  {
                             </Tooltip>
                             </Badge>} 
                             // label="Messages" 
-                            value="/messages" 
+                            // value="/messages" 
+                            component={Link}
+                            to={"/"}
                         />
                     
 
                         <CustomTab icon={<Badge badgeContent={4} color="error">
-                            <Tooltip title="Jobs">
-                                <WorkIcon  />
+                            <Tooltip title="Bookmarks">
+                                <BookmarkIcon  />
                             </Tooltip>
                         </Badge>} 
-                        value="/jobs" 
+                        // value="/users/bookmark" 
+                        component={Link}
+                        to={"/users/bookmark"}
                         />
 
-                        <CustomTab icon={<Badge badgeContent={4} color="error" >
+                        {/* <CustomTab icon={<Badge badgeContent={4} color="error" >
                             <Tooltip title="Notifications">
                                 <NotificationsIcon  />
                             </Tooltip>
                         </Badge>} 
                         // label="Notifications" 
                         value="/notifications" 
-                        />
+                        /> */}
 
                         <CustomTab icon={
                             <Tooltip title="My Profile">

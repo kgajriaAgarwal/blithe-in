@@ -143,6 +143,74 @@ actionLogin: {
       showErrorMessage: true,
   },
 
+  //LIKE/DISLIKE POST
+    //actionLikeComment
+     actionLikePost:{
+      url: '/api/posts/like/:postId',
+        method: 'POST',
+        data: {},
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': encodedToken
+        }, 
+        showResultMessage: false,
+        showErrorMessage: true,
+    },
+    
+    //actionDislikeComment
+    actionDislikePost:{
+      url: '/api/posts/dislike/:postId',
+        method: 'POST',
+        data: {},
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': encodedToken
+        }, 
+        showResultMessage: false,
+        showErrorMessage: true,
+    },
+
+  //BOOKMARK ROUTE
+
+  //actionGetAllBookmarks
+  actionGetAllBookmarks: {
+    url: '/api/users/bookmark',
+    method: 'GET',
+    data: {},
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': encodedToken
+    }, 
+    showResultMessage: false,
+    showErrorMessage: false,
+  },
+
+  //actionBookmarkPost
+  actionBookmarkPost:{
+    url: '/api/users/bookmark/:postId',
+      method: 'POST',
+      data: {},
+      headers: {
+        'Content-Type': 'application/json',
+        'authorization': encodedToken
+      }, 
+      showResultMessage: false,
+      showErrorMessage: true,
+  },
+
+    //actionRemoveBookmarkPost
+    actionRemoveBookmarkPost:{
+      url: '/api/users/remove-bookmark/:postId',
+        method: 'POST',
+        data: {},
+        headers: {
+          'Content-Type': 'application/json',
+          'authorization': encodedToken
+        }, 
+        showResultMessage: false,
+        showErrorMessage: true,
+    },
+
   //COMMENTS ROUTE
   //actionGetAllComments
   actionGetAllComments: {
@@ -162,7 +230,6 @@ actionLogin: {
     url: '/api/comments/add/:postId',
       method: 'POST',
       data: {
-        // commentData:{}
         commentData: {}
       },
       headers: {
@@ -179,7 +246,6 @@ actionLogin: {
     url: '/api/comments/edit/:postId/:commentId',
       method: 'POST',
       data: {
-        // commentData:{}
         commentData: {}
       },
       headers: {
@@ -228,5 +294,8 @@ actionLogin: {
       showResultMessage: false,
       showErrorMessage: true,
   },
+
+ 
+
 
 }

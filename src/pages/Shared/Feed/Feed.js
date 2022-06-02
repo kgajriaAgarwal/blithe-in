@@ -22,6 +22,13 @@ export const Feed = (props) => {
     }
     , [username])
 
+    // data.bookmarks.data.bookmarks
+
+//      useEffect(()=> {
+//     // setComment_data(dataa?.comments?.data?.comments )
+//         console.log("data is in feed card.js:", data);
+//   }, [data  && data?.bookmarks?.data?.bookmarks && data?.bookmarks?.status!=='loading'])
+
     useEffect(() => {
         dispatch(getPosts());
       }, []);
