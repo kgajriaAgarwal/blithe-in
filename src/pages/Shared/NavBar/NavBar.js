@@ -69,7 +69,8 @@ const CustomMenuItem = styled(MenuItem)(({theme}) =>({
 export const NavBar = (props) =>  {
 
         const { token } = useSelector((state) => state.auth);
-        const dataa = useSelector((state) => state.auth.auth);
+        // const dataa = useSelector((state) => state.auth.auth);
+        const authData = getLocalStorage('authData');
         const [open, setOpen] = useState(false);
         const navigate = useNavigate();
         const dispatch = useDispatch();
@@ -237,12 +238,12 @@ export const NavBar = (props) =>  {
                     </ListItemIcon>
                     Settings
                 </CustomMenuItem>
-                <Button onClick={()=> dataa && dataa.token ?  dispatch(logoutUser()) : navigate("./login")}>
+                <Button onClick={()=> authData ?  dispatch(logoutUser()) : navigate("./login")}>
                     <CustomMenuItem>
                         <ListItemIcon>
                             <Logout fontSize="small" />
                         </ListItemIcon>
-                        { dataa && dataa.token ? 'Logout': 'Login'}
+                        { authData  ? 'Logout': 'Login'}
                     </CustomMenuItem>
                 </Button>
             </Menu>
