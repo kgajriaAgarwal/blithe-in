@@ -2,14 +2,6 @@
 ////console.log is also commented , until the time the this app is fully developed
 import axios from 'axios';
 import { ApiJson } from './apiJson';
-
-// import { ApiJson } from './apiJson';
-
-// import {
-//   showErrorToast,
-//   showSuccessToast, 
-//   getLocalStorage,
-// } from './../Helpers/Utils';
 import {getLocalStorage} from '../Common/utils';
 // import CONSTANTS from './../Helpers/Constants'; 
 

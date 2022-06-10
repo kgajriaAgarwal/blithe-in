@@ -202,6 +202,7 @@ export const AddPostModal = (props) => {
           style={textAreaStyle}
           name= "content"
           value={values.content}
+          color="primary"
           onChange={handleInputChange}
         />
          <FormHelperText id="my-helper-text" sx={{ color: "red" }}>

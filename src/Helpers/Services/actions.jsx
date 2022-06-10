@@ -23,8 +23,6 @@ export const actionSignup = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
     }
 };
@@ -37,8 +35,6 @@ export const getAllUsers = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -49,8 +45,6 @@ export const getUserById = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -61,8 +55,6 @@ export const actionFollowUser = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -73,8 +65,6 @@ export const actionUnFollowUser = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -87,8 +77,6 @@ export const getAllPosts = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -99,8 +87,6 @@ export const getPostById = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -111,8 +97,6 @@ export const getPostByUsername = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -124,8 +108,6 @@ export const createPost = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -137,8 +119,6 @@ export const actionDeletePost = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -149,8 +129,6 @@ export const actionEditPost = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -163,8 +141,6 @@ export const actionGetAllComments = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -175,8 +151,6 @@ export const actionAddComment = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -187,8 +161,6 @@ export const actionEditComment = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -199,8 +171,6 @@ export const actionDeleteComment = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -211,8 +181,6 @@ export const actionUpvoteComment = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -223,8 +191,6 @@ export const actionDownvoteComment = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -235,8 +201,6 @@ export const actionLikePost = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -246,8 +210,6 @@ export const actionDislikePost = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -258,8 +220,6 @@ export const actionGetAllBookmarks = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -270,8 +230,6 @@ export const actionBookmarkPost = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
@@ -284,8 +242,6 @@ export const actionRemoveBookmarkPost = async (data) => {
   if (response.data &&(response.status === 201 || response.status === 200)) {
     return response;
     }else{
-      console.log("response.data.errors:", response.data.errors);
-      // showErrorToast(response.data.errors[0])
       showErrorToast("Unexpected error")
   }
 };
