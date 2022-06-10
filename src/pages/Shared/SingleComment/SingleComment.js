@@ -21,6 +21,7 @@ import { getLocalStorage } from '../../../Helpers/Common/utils';
 import { Box , Button, Checkbox, TextField} from "@mui/material";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { deleteComment, downvoteComment, editComment, getComments, upvoteComment } from '../../../app/slice/postSlice';
+import { getUsers } from '../../../app/slice/userSlice';
 
 const CommentBoxContainer = styled(Card)(({ theme }) => ({    
     backgroundColor: theme.palette.mode === "light"? 
@@ -36,6 +37,7 @@ const CommentBoxContainer = styled(Card)(({ theme }) => ({
     const [isEdit, setIsEdit] = useState(false);
     const [commentInputData, setCommentInputData] = useState(comment?.text);
     const dispatch = useDispatch();
+    const data_user = useSelector((state) => state.user);
 
      //handleEditCommentInput
   const handleEditCommentInput = () => {
@@ -72,12 +74,23 @@ const CommentBoxContainer = styled(Card)(({ theme }) => ({
       commentId: comment?._id}))
   }
 
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
+
+  const handleUserProfilePic = () => {
+    if(data_user && data_user?.users?.allUsers && data_user?.users?.allUsers?.length && data_user?.users?.status!=='loading'){
+      const user =  data_user?.users?.allUsers.find(user_el => user_el.username === comment?.username)
+      return user.profilePic;
+    }
+  }
+
     return(
         <CommentBoxContainer >
           <CardHeader
             avatar={
-              <Avatar sx={{ bgcolor: red[500] }} aria-label="profile">
-                {comment?.username? comment?.username.length? comment?.username[0].toUpperCase() :'':'' }
+              <Avatar sx={{ bgcolor: red[500] }} aria-label="profile"src={handleUserProfilePic()} alt="user-img">
+                {/* {comment?.username? comment?.username.length? comment?.username[0].toUpperCase() :'':'' } */}
               </Avatar>
             }
             action={

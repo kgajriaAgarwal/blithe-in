@@ -8,38 +8,13 @@
 // }
 
 import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import './Comment.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getLocalStorage } from '../../../Helpers/Common/utils';
 import { Box , Button, TextField} from "@mui/material";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { editComment, getComments } from '../../../app/slice/postSlice';
+import { getComments } from '../../../app/slice/postSlice';
 import react, { useEffect,useState } from 'react';
 import { SingleComment } from '../SingleComment/SingleComment';
-
-const CommentBoxContainer = styled(Card)(({ theme }) => ({    
-    backgroundColor: theme.palette.mode === "light"? 
-    'rgba(0, 0, 0, 0.06)': 
-    'rgba(255, 255, 255, 0.09)',    //BOX COLORS
-  }));
 
 export const Comment = (props) => {
 

@@ -30,6 +30,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import { v4 as uuid } from "uuid";
 import { Comment } from "../Comment/Comment";
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import { getUsers } from "../../../app/slice/userSlice";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -54,11 +55,7 @@ export const FeedCard = (props) => {
   const data = useSelector((state) => state.post);
   const is_bookmark = (data  && data?.bookmarks?.data?.bookmarks && data?.bookmarks?.status!=='loading') ? data?.bookmarks?.data?.bookmarks.some(el => feed?.username === el.username && feed._id === el._id): false;
   const [commentInputData, setCommentInputData] = React.useState("");
-
-  //      useEffect(()=> {
-  //   // setComment_data(dataa?.comments?.data?.comments )
-  //       console.log("data is in feed card.js:", data);
-  // }, [data  && data?.bookmarks?.data?.bookmarks && data?.bookmarks?.status!=='loading'])
+  const data_user = useSelector((state) => state.user);
 
   const handleCommentInput = () => {
     if (commentInputData.length) {
@@ -99,15 +96,26 @@ export const FeedCard = (props) => {
     },
   };
 
+  useEffect(() => {
+    dispatch(getUsers());
+  }, []);
 
+  const handleUserProfilePic = () => {
+    if(data_user && data_user?.users?.allUsers && data_user?.users?.allUsers?.length && data_user?.users?.status!=='loading'){
+      const user =  data_user?.users?.allUsers.find(user_el => user_el.username === feed.username)
+      return user.profilePic;
+    }
+  }
+
+ 
   return (
     <>
       <CssBaseline />
       <Card sx={{ marginTop: "10px", color: "red" }}>
         <CardHeader
           avatar={
-            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-              R
+            <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={handleUserProfilePic()} alt="user-img">
+              {/* {handleUserProfilePic()} */}
             </Avatar>
           }
           action={

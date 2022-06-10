@@ -25,7 +25,7 @@ const RouteData = () =>{
            <Route exact path='/users' element={<PrivateRoute/>}>                
               <Route exact path="/users/bookmark"  element={<BookmarkPage/>}/> 
             </Route>
-            <Route exact path="/profile/:userId"  element={<UserProfile/>}/>
+            <Route exact path="/profile/:username"  element={<UserProfile/>}/>
             <Route exact path="/posts/user/:username"  element={<FeedsPage/>}/>
             <Route exact path="/post/:postId"  element={<FeedDetailsPage/>}/> 
             <Route exact path='/home' element={<FeedsPage/>}/>

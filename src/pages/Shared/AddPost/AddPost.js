@@ -11,7 +11,6 @@ export const AddPost = (props) =>{
     const dispatch = useDispatch();
     const dataa = useSelector((state) => state.postModal);
     const [open , setOpen] = useState(dataa.addPostModal);
-    // const authData = getLocalStorage("authData")? getLocalStorage("authData") :'' ;
     const authData = localStorage.getItem("authData");
 
     const handleOpen = () => {

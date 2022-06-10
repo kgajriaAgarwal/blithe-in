@@ -61,7 +61,7 @@ const ProfileData = (props) => {
         <LeftBoxConatiner>
           {/* USERPROFILE BOX */}
           <Box bgcolor={"Background.default"} className="left-profile-box">
-            <EditBoxContainer className="btn-cover-edit-box">
+            {/* <EditBoxContainer className="btn-cover-edit-box">
               <IconButton
                 aria-label="delete"
                 size="large"
@@ -69,7 +69,7 @@ const ProfileData = (props) => {
               >
                 <EditIcon />
               </IconButton>
-            </EditBoxContainer>
+            </EditBoxContainer> */}
             <img
               src="https://media.istockphoto.com/photos/triangular-abstract-background-picture-id624878906?k=20&m=624878906&s=612x612&w=0&h=DKUXpuMTr4jPDageP1R-_0vuRCB2cn4Sn0GiUAESHwI="
               alt="cover-img"
@@ -98,7 +98,7 @@ const ProfileData = (props) => {
                 </Typography>
 
                 <Typography variant="subtitle2" mt={2} component="div">
-                  3,537 followers , 500+ connections
+                  {`${userDetailsData?.following?.length} followings ,${userDetailsData?.followers?.length} followers`}
                 </Typography>
               </Box>
               <Box>

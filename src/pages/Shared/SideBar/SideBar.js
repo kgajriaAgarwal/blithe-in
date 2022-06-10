@@ -23,17 +23,8 @@ export const SideBar = (props) => {
   const dispatch = useDispatch();
   const dataa = useSelector((state) => state.auth);
   const userDataa = useSelector((state) => state.user);
-  const user_info = dataa?.isLoggedIn===false ? "" :userDataa?.userDetails?.data?.user
-
-  const userInfo = dataa?.user? dataa?.user : '';
-  const id = dataa?.auth?.user?._id 
-
-  useEffect(()=>  {
-    if(id){
-      dispatch(getUserDetailsByID(id))
-    }
-  }
-  , [ id && id.length ? id : '' ])
+  const user_info = dataa?.isLoggedIn===false ? "" : getLocalStorage('userData');
+  const userInfo = getLocalStorage('userData');
 
 
   return (

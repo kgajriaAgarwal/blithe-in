@@ -6,26 +6,16 @@ import {
   styled,
   IconButton,
   Divider,
+  Button,
 } from "@mui/material";
 import react, { useEffect, useState } from "react";
-import { setLocalStorage } from "../../Helpers/Common/utils";
-import { AddPost, Feed, RightBar, SideBar } from "../Shared";
+import { getLocalStorage, setLocalStorage } from "../../Helpers/Common/utils";
 import "./UserProfile.css";
 import EditIcon from "@mui/icons-material/Edit";
-import { color, display } from "@mui/system";
-import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import EqualizerIcon from "@mui/icons-material/Equalizer";
-import Stepper from "@mui/material/Stepper";
-import Step from "@mui/material/Step";
-import StepLabel from "@mui/material/StepLabel";
-import StepContent from "@mui/material/StepContent";
-import CircleIcon from "@mui/icons-material/Circle";
-import { useThemeMode } from "../../Helpers/Context";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { getUsers, getUserDetailsByID } from "../../app/slice/userSlice";
+import { getUsers, getUserDetailsByID, followUser } from "../../app/slice/userSlice";
 import ProfileData from "./ProfileDetails";
-
 
 //RightBoxConatiner
 const RightBoxConatiner = styled(Box)(({ theme }) => ({
@@ -37,36 +27,53 @@ const RightBoxConatiner = styled(Box)(({ theme }) => ({
   },
 }));
 
-
 const UserProfile = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const data = useSelector((state) => state.user);
   const allUsers = data?.users?.allUsers;
   const userDetailsData = data?.userDetails?.data?.user;
-  let  { userId } = useParams(); 
+  const userData = getLocalStorage("userData");
+  let { username } = useParams();
+
+  useEffect(() => {
+    dispatch(getUserDetailsByID(username));
+  }, [username]);
 
   useEffect(() => {
     dispatch(getUsers());
   }, []);
 
-  useEffect(()=>  {
-    dispatch(getUserDetailsByID(userId))
-  }
-  , [userId])
+  const handleFollow = (userId) => {
+    if(data && data?.userDetails?.data?.user && data?.userDetails?.data?.user?.following &&data?.userDetails?.data?.user?.following?.length && data?.userDetails?.status!=='loading'){
+      const isFollowed = data?.userDetails?.data?.user?.following.some(user => user._id === userId)
+      dispatch(followUser({ userId: userId, isFollowed:  isFollowed }))
+    }else{
+      dispatch(followUser({ userId: userId, isFollowed:  false }))
+    }
+    
+  };
 
- 
+  const handleFollowUser = (username) => {
+    if(data && data?.userDetails?.data?.user && data?.userDetails?.data?.user?.following &&data?.userDetails?.data?.user?.following?.length && data?.userDetails?.status!=='loading'){
+      const isFollowed = data?.userDetails?.data?.user?.following.some(user => user.username === username)
+      return isFollowed ? 'unfollow' :'Follow'
+    }else{
+      return 'Follow'
+    }
+  }
 
   return (
     <>
       <Stack direction="row" spacing={2} justifyContent="space-between" p={4}>
-        {data?.status === "loading" ? 
-            <Typography variant="h6" sx={{ color: "secondary" }}>
+        {data?.status === "loading" ? (
+          <Typography variant="h6" sx={{ color: "secondary" }}>
             Loading..
-            </Typography>
-            : <ProfileData userDetailsData = {userDetailsData}/> 
-        }
-        
+          </Typography>
+        ) : (
+          <ProfileData userDetailsData={userDetailsData} />
+        )}
+
         <RightBoxConatiner>
           <Box bgcolor={"Background.default"} className="analytics-box" p={2}>
             <Typography variant="h6" sx={{ color: "secondary" }}>
@@ -78,9 +85,11 @@ const UserProfile = () => {
               justifyContent="space-between"
             >
               {allUsers && allUsers.length
-                ? allUsers.map((user) => {
+                ? allUsers.filter(user_el => user_el.username !== userData.username ).map((user) => {
                     return (
                       <>
+                      <Stack
+                        direction="row">
                         <Stack
                           direction="row"
                           spacing={2}
@@ -89,7 +98,7 @@ const UserProfile = () => {
                           className="user-row"
                           onClick={() =>
                             dispatch(
-                              getUserDetailsByID(user._id)
+                              getUserDetailsByID(user?.username)
                             )
                           }
                         >
@@ -107,12 +116,22 @@ const UserProfile = () => {
                             </Typography>
                           </Stack>
                         </Stack>
+                        
+                         <Button
+                         className="btn-follow"
+                         id="btn-follow"
+                         onClick={()=>handleFollow(user._id)}
+                       >
+                         {handleFollowUser(user.username)}
+                       </Button>  
+                      
+                       
+                        </Stack>
                         <Divider />
                       </>
                     );
                   })
                 : "No connection recommendations"}
-
             </Stack>
           </Box>
         </RightBoxConatiner>

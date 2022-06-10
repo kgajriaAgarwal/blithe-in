@@ -51,7 +51,8 @@ actionLogin: {
 
   //Action to get User By Id -- This API call gets a user from the db
   getUserById: {
-    url: '/api/users/:userId',
+    // url: '/api/users/:userId',
+    url: '/api/users/:username',
     method: 'GET',
     data: {},
     headers: {
@@ -60,6 +61,33 @@ actionLogin: {
     showResultMessage: false,
     showErrorMessage: false,
   },
+
+//actionFollowUser
+actionFollowUser:{
+  url: '/api/users/follow/:followUserId',
+    method: 'POST',
+    data: {},
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': encodedToken
+    }, 
+    showResultMessage: false,
+    showErrorMessage: true,
+},
+
+
+//actionUnFollowUser
+actionUnFollowUser:{
+  url: '/api/users/unfollow/:followUserId',
+    method: 'POST',
+    data: {},
+    headers: {
+      'Content-Type': 'application/json',
+      'authorization': encodedToken
+    }, 
+    showResultMessage: false,
+    showErrorMessage: true,
+},
 
 
   //POSTS

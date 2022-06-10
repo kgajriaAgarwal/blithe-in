@@ -105,3 +105,16 @@
     font-weight: 700;
 }
 
+#btn-follow.btn-follow{
+    width: 2rem;
+    text-align: right;
+    margin-left: auto;
+    text-transform:none;
+    font-weight: 700;
+    cursor: pointer; 
+    color: var(--white-color);
+    background-color: var(--primary-bg);
+    height: 2rem;
+    margin-top: 10px;
+}
+

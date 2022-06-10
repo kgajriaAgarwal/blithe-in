@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getAllUsers, getUserById } from "../../Helpers/Services/actions"; 
+import { actionFollowUser, actionUnFollowUser, getAllUsers, getUserById } from "../../Helpers/Services/actions"; 
 // import { updateUser } from "../Auth/authSlice";
 
 const initialState = {
@@ -25,15 +25,33 @@ export const getUsers = createAsyncThunk(
   //getUserById
   export const getUserDetailsByID = createAsyncThunk(
     "user/getUserDetailsByID",
-    async ( userId , thunkAPI) => {
+    
+    async ( username , thunkAPI) => {
       try {
-          const response = await getUserById({ userId});
+          const response = await getUserById({ username});
           return response.data;
       } catch (error) {
         return thunkAPI.rejectWithValue(error);
       }
     }
   );
+
+
+    //getUserById
+    export const followUser = createAsyncThunk(
+      "user/followUser",
+      
+      async ( data, thunkAPI) => {
+        try {
+          const response = data?.isFollowed
+            ?  await actionUnFollowUser({ followUserId: data?.userId })
+            :await actionFollowUser({ followUserId: data?.userId });
+          return response.data;
+        } catch (error) {
+          return thunkAPI.rejectWithValue(error);
+        }
+      }
+    );
 
   const userSlice = createSlice({
     name: "user",
@@ -85,6 +103,31 @@ export const getUsers = createAsyncThunk(
           error: action.error.message,
         };
       },
+
+      //followUser
+      [followUser.pending]: (state, action) => {
+        state.userDetails = {
+          status: "loading",
+          data: {},
+          error: {},
+        };
+      },
+      [followUser.fulfilled]: (state, action) => {
+        state.userDetails = {
+          status: "idle",
+          data: action.payload,
+          error: {},
+        };
+      },
+      [followUser.rejected]: (state, action) => {
+        state.userDetails = {
+          status: "idle",
+          data: {},
+          error: action.error.message,
+        };
+      },
+
+
     }
   })
   

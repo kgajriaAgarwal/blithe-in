@@ -56,8 +56,9 @@ export const AddPostModal = (props) => {
     postImage:postToBeEditedInfo ? postToBeEditedInfo.postImage? postToBeEditedInfo.postImage:"":"",
     content:postToBeEditedInfo ? postToBeEditedInfo.content? postToBeEditedInfo.content:"":"",
     username: userData?.username,
-    createdAt: new Date().toDateString(),
+    createdAt:new Date().toLocaleString(),
     error: { title: null, content: null },
+    comments: []
   });
 
   useEffect(()=>{
@@ -68,7 +69,7 @@ export const AddPostModal = (props) => {
         postImage:postToBeEditedInfo ? postToBeEditedInfo.postImage? postToBeEditedInfo.postImage:"":"",
         content:postToBeEditedInfo ? postToBeEditedInfo.content? postToBeEditedInfo.content:"":"",
         username: userData?.username,
-        createdAt: new Date().toDateString(),
+        createdAt: new Date().toLocaleString(),
         error: { title: null, content: null },
       })
     }
@@ -101,7 +102,7 @@ export const AddPostModal = (props) => {
       postImage:"",
       content: "",
       username: userData?.username,
-      createdAt: new Date().toDateString(),
+      createdAt: new Date().toLocaleString(),
       error: { title: null, content: null },
     })
   }

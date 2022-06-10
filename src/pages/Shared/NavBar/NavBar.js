@@ -74,9 +74,8 @@ export const NavBar = (props) =>  {
         const navigate = useNavigate();
         const dispatch = useDispatch();
         const location = useLocation();
-        const id = dataa?.user?._id ? dataa?.user?._id :'';
-
         const userData = getLocalStorage("userData")
+        const username = userData?.username ? userData?.username :'';
 
     return (
         <AppBar position='sticky' bgcolor={"#A14F57"}>
@@ -95,68 +94,60 @@ export const NavBar = (props) =>  {
                     <Tabs 
                         className='tab'
                         indicatorColor="secondary"
-                        // value={'/jobs'} 
                         aria-label="icon label tabs example"
                         selectionFollowsFocus
-                        // value={value}
-                        //onChange={handleChange}
                         variant="fullWidth"
                         textColor="secondary"
                         color='white'
-                        // value={
-                        //     history.location.pathname !== "/"
-                        //       ? history.location.pathname
-                        //       : false
-                        //   }
                         value={
                             location.pathname !== "/"
                               ? location.pathname
                               : false
                           }
                         >
-                        <CustomTab icon={<Badge badgeContent={4} color="error" >
+                        <CustomTab icon={
                             <Tooltip title="Home" color='white'>
                                 <HomeIcon />
                             </Tooltip>
-                        </Badge>} 
-                        // label="Home" 
-                        // value="/"
+                        } 
                         component={Link}
                         to={"/"}
                         />
                          
-                        <CustomTab icon={<Badge badgeContent={4} color="error">
-                            <Tooltip title="My network">
+                        {/* underdevelopoment */}
+                        {/* <CustomTab icon={<Badge badgeContent={4} color="error">
+                            <Tooltip title="Feeds">
                                 <PublicIcon />
                             </Tooltip>
                         </Badge>} 
                         // label="Home" 
                         value="/"
-                        />
+                        /> */}
                         
 
                         <CustomTab icon={<Badge badgeContent={4} color="error">
-                            <Tooltip title="Messages">
+                            <Tooltip title="under development">
                                 <MailIcon  />
                             </Tooltip>
-                            </Badge>} 
-                            // label="Messages" 
-                            // value="/messages" 
+                            </Badge>
+                        } 
                             component={Link}
                             to={"/"}
                         />
                     
 
-                        <CustomTab icon={<Badge badgeContent={4} color="error">
+                        <CustomTab 
+                            //icon={<Badge badgeContent={4} color="error">
+                            icon={
                             <Tooltip title="Bookmarks">
                                 <BookmarkIcon  />
                             </Tooltip>
-                        </Badge>} 
-                        // value="/users/bookmark" 
+                        } 
                         component={Link}
                         to={"/users/bookmark"}
                         />
 
+                        {/* underdevelopoment */}
                         {/* <CustomTab icon={<Badge badgeContent={4} color="error" >
                             <Tooltip title="Notifications">
                                 <NotificationsIcon  />
@@ -225,7 +216,7 @@ export const NavBar = (props) =>  {
             >
                 {/* to={`/user/profile/${}`} */}
                 {/* <Link to={userData ? `/profile/${userData._id}` : '#'}> */}
-                <Link to={id  && id.length ? `/profile/${id}` : '#'}>
+                <Link to={username  && username.length ? `/profile/${username}` : '#'}>
                     <CustomMenuItem>
                         <Avatar /> Profile
                     </CustomMenuItem>

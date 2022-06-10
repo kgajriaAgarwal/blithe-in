@@ -55,6 +55,31 @@ export const getUserById = async (data) => {
   }
 };
 
+//actionFollowUser
+export const actionFollowUser = async (data) => {
+  const response = await mainApiService("actionFollowUser", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+//actionUnFollowUser
+export const actionUnFollowUser = async (data) => {
+  const response = await mainApiService("actionUnFollowUser", data);
+  if (response.data &&(response.status === 201 || response.status === 200)) {
+    return response;
+    }else{
+      console.log("response.data.errors:", response.data.errors);
+      // showErrorToast(response.data.errors[0])
+      showErrorToast("Unexpected error")
+  }
+};
+
+
 //POSTS ROUTE
 //GET ALL POSTS
 export const getAllPosts = async (data) => {

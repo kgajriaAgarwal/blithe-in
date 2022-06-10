@@ -10,7 +10,7 @@ const MainPageLayout = () => {
     const {themeMode, setThemeMode} = useThemeMode(); 
     
     return(
-        <Box  bgcolor={themeMode==="light"? "#F5F5F5":"Background.default"}>
+        <Box  bgcolor={themeMode==="light"? "#F5F5F5":"Background.default"} sx={{minHeight:'100vh'}}>
             <NavBar/>
             <MainPageRoute/>
         </Box>
