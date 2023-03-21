@@ -15,6 +15,7 @@ import { Input } from "../Shared";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser } from "../../app/slice/authSlice";
 import { validateLogin } from "../../Helpers/Validations";
+import bgImg from '../../Assets/Images/bg-collage.jpg'
 
 
 const CustomStack = styled(Box)(({ theme }) => ({
@@ -149,7 +150,7 @@ const Login = () => {
       <CustomStack>
         {/* <SwipeableStepper/> */}
         <img
-          src={"http://nalccon2020.com/assets/one.gif"}
+          src={bgImg}
           alt="bg-img"
           className="bg-img"
         />
